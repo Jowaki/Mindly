@@ -7,9 +7,14 @@
 *                Eduardo Sanchez - developed a field for name and email - typable boxes
                  October 6th 
                  Eduardo Sanchez - developed a field for password - typable boxes
-* KNOWN FAULT - Not connected to database
+                 October 23rd 
+                 Jowaki Merani & Parveen Kaur - add locations to extract data from the text box to the db 
+* KNOWN FAULT - None
 */
+
 import 'package:flutter/material.dart';
+// ignore: unnecessary_import
+import 'package:mongo_dart/mongo_dart.dart' as mongo;
 
 class MyRegister extends StatefulWidget { // class for the sign up page.
   const MyRegister({Key? key}) : super(key: key); // constructor.
@@ -20,6 +25,8 @@ class MyRegister extends StatefulWidget { // class for the sign up page.
 
 class _MyRegisterState extends State<MyRegister> { //class is defined here.
   @override
+  final myController = TextEditingController();////creates a text extrating var 
+
   Widget build(BuildContext context) { //initializes the page build.
     return Container( // container widget. What the program is going to contain.
        child: Scaffold( //child scaffold, this is the top bar of the page.
@@ -51,6 +58,9 @@ class _MyRegisterState extends State<MyRegister> { //class is defined here.
                     hintText: 'Name', //hint text disappears when user inputs information.
                     hintStyle: const TextStyle(color: Colors.white), //color of the hint text 'Name'.
                   ),
+                  controller: myController,////gets the value from the text box 
+
+
                 ),
                 
                 //this section imitates the behavior above.  
@@ -95,7 +105,9 @@ class _MyRegisterState extends State<MyRegister> { //class is defined here.
                     ),
                     hintText: 'Password', // displays string 'Password' when the box is idle. string disappears when user fills text.
                     hintStyle: const TextStyle(color: Colors.white), // color to display 'Password'.
+                    
                   ),
+                  
                 ),
                 
                 
@@ -118,7 +130,9 @@ class _MyRegisterState extends State<MyRegister> { //class is defined here.
                       CircleAvatar( radius: 30, //creates widget circle and sets the radius (size) to 30.
                                     backgroundColor: const Color(0xff4c505b), // sets the background color of the circle widget.
                         child: IconButton( color: Colors.white, //the color of icon inside the button. currently set to white.
-                                           onPressed: () {}, // what actions are taken the button is pressed.
+                                           onPressed: () {
+                                              
+                                           }, // what actions are taken the button is pressed.
                                            icon: const Icon(Icons.arrow_forward), // the icon nested inside the circle button, currently shown as an arrow.
                                           ),
                                    ),
