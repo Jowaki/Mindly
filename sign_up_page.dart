@@ -8,24 +8,42 @@
                  October 6th 
                  Eduardo Sanchez - developed a field for password - typable boxes
                  October 23rd 
-                 Jowaki Merani & Parveen Kaur - add locations to extract data from the text box to the db 
+                 Jowaki Merani & Parveen Kaur - add locations to extract data from the text box to the db
+                 November 4th 
+                 Jowaki Merani - add the data to the db on clicking the button  
 * KNOWN FAULT - None
 */
+
+import 'dart:developer';
+import 'package:flutter_application_1/constant.dart';
 
 import 'package:flutter/material.dart';
 // ignore: unnecessary_import
 import 'package:mongo_dart/mongo_dart.dart' as mongo;
 
+
 class MyRegister extends StatefulWidget { // class for the sign up page.
   const MyRegister({Key? key}) : super(key: key); // constructor.
 
   @override
+  // ignore: library_private_types_in_public_api
   _MyRegisterState createState() => _MyRegisterState(); // creates sign up page.
 }
 
-class _MyRegisterState extends State<MyRegister> { //class is defined here.
+class _MyRegisterState extends State<MyRegister> {
+  // ignore: non_constant_identifier_names
+  
+  String g_name = "";//initialise global variable for name 
+  String g_password = "";//initialise global variable for password 
+  String g_email = "";//initialise global variable for email 
+  
+  // get password => null;
+  
+  // get email => null;
+ //class is defined here.
   @override
-  final myController = TextEditingController();////creates a text extrating var 
+  // final myController = TextEditingController();////creates a text extrating var 
+
 
   Widget build(BuildContext context) { //initializes the page build.
     return Container( // container widget. What the program is going to contain.
@@ -58,7 +76,8 @@ class _MyRegisterState extends State<MyRegister> { //class is defined here.
                     hintText: 'Name', //hint text disappears when user inputs information.
                     hintStyle: const TextStyle(color: Colors.white), //color of the hint text 'Name'.
                   ),
-                  controller: myController,////gets the value from the text box 
+                  // controller: myController,////gets the value from the text box 
+                  onChanged: (name){g_name = name;},//on edditig send the value to g_name 
 
 
                 ),
@@ -73,6 +92,7 @@ class _MyRegisterState extends State<MyRegister> { //class is defined here.
                     focusedBorder: OutlineInputBorder( // when the border is chosen.
                       borderRadius: BorderRadius.circular(10), // border size around the text box.
                       borderSide: const BorderSide(color: Colors.black), //border color is black when the user picks the box.
+                      
                     ),
                     
                     enabledBorder: OutlineInputBorder( //when the border is idle.
@@ -83,6 +103,7 @@ class _MyRegisterState extends State<MyRegister> { //class is defined here.
                     hintText: 'Email', // 'Email' is displayed when the user has not filled in the box.
                     hintStyle: const TextStyle(color: Colors.white), // 'Email' hint is displayed in white.
                   ),
+                  onChanged: (email){g_email = email;},//on edditig send the value to g_email 
                 ),
                 
                 // Same as above but for 'Password'
@@ -106,7 +127,9 @@ class _MyRegisterState extends State<MyRegister> { //class is defined here.
                     hintText: 'Password', // displays string 'Password' when the box is idle. string disappears when user fills text.
                     hintStyle: const TextStyle(color: Colors.white), // color to display 'Password'.
                     
+                    
                   ),
+                  onChanged: (password){g_password = password;},//on edditig send the value to g_password 
                   
                 ),
                 
@@ -130,9 +153,20 @@ class _MyRegisterState extends State<MyRegister> { //class is defined here.
                       CircleAvatar( radius: 30, //creates widget circle and sets the radius (size) to 30.
                                     backgroundColor: const Color(0xff4c505b), // sets the background color of the circle widget.
                         child: IconButton( color: Colors.white, //the color of icon inside the button. currently set to white.
-                                           onPressed: () {
+                                           onPressed: ()  async {
+                                            var db = await mongo.Db.create(MONGO_URL);//wait to locate url 
+                                            await db.open();//opens the connection to url - reuquired db 
+                                            inspect(db);//ensures url exists
+                                            var status = db.serverStatus();//provides the status of url 
+
+                                            // ignore: avoid_print 
+                                            print(status);//debug print to ensure sucessful status 
+                                            var collection = db.collection(COLLECTION_NAME);//accesses collection name 
+                                              await collection.insert({"name":g_name, "password":g_password, "email":g_email});//send teh globas to the db 
+                                              Navigator.pushNamed(context, 'login_page');//on pushing the button redirect to the login page 
                                               
-                                           }, // what actions are taken the button is pressed.
+                                           }, 
+                                           // what actions are taken the button is pressed.
                                            icon: const Icon(Icons.arrow_forward), // the icon nested inside the circle button, currently shown as an arrow.
                                           ),
                                    ),

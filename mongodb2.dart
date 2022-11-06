@@ -11,10 +11,10 @@
 import 'dart:developer';
 import 'package:flutter_application_1/constant.dart';
 import 'package:mongo_dart/mongo_dart.dart';
-
-
-
-class MongoDbDatabase {//create class to connect db 
+class MongoDbDatabase {
+   static get email => null;  static get password => null; static get username => null;
+ 
+//create class to connect db 
   static connect() async {//conect function used to connect to db 
     var db = await Db.create(MONGO_URL);//wait to locate url 
     await db.open();//opens the connection to url - reuquired db 
@@ -24,7 +24,7 @@ class MongoDbDatabase {//create class to connect db
     // ignore: avoid_print 
     print(status);//debug print to ensure sucessful status 
     var collection = db.collection(COLLECTION_NAME);//accesses collection name 
-    await collection.insert({"name":"admin", "password":"hello", "email":"admin@gmail.com"});//adds input to db 
+    await collection.insert({"name":username, "password":password, "email":email});//adds input to db 
 
     // ignore: avoid_print
     print(await collection.find().toList());//prinst the data added to the db 

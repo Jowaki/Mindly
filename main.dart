@@ -9,19 +9,23 @@
                  Eduardo Sanchez - linked the main page buttons to corresponding pages
                  October 23rd 
                  Jowaki Merani - reformat the code to work for database connections
+                 November 4th 
+                 Jowaki Merani - Update the code for connecting to teh home page with required update to imports 
 * KNOWN FAULT - None
 */
 import 'package:flutter/material.dart';
+import 'button_game.dart';
 import 'login_page.dart';
 import 'sign_up_page.dart';
 import 'journal_page.dart';
-import 'mongodb.dart';
+import 'DemoApp.dart';
+// import 'mongodb.dart';
 
 
 Future <void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   // ignore: await_only_futures
-  await MongoDbDatabase.connect();
+  // await MongoDbDatabase.connect();
   runApp(const MyApp());
 }
 
@@ -39,6 +43,8 @@ Future <void> main() async {
             'login_page': (context) => const MyLogin(), // login page available to traverse to
             'sign_up_page': (context) => const MyRegister(), // sign up page available to traverse
             'journal_page':(context) => const MyJournal(), // Journal page available to traverse.
+            'home_page' :(context) => DemoApp(),
+            'game_page' :(context) => const buttonApp(),
           }
         );
       

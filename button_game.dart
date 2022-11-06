@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
 void main() { // main program
-  runApp(const MyApp()); // runs the app in the main function.
+  runApp(const buttonApp()); // runs the app in the main function.
 }
 
-class MyApp extends StatelessWidget { // Myapp class
-  const MyApp({super.key}); //allows for dependencies on configurations.
+class buttonApp extends StatelessWidget { // buttonApp class
+  const buttonApp({super.key}); //allows for dependencies on configurations.
   @override
   Widget build(BuildContext context) { //allows the page to be built with widgets.
     return MaterialApp( // creates a class of widget apps.
