@@ -1,3 +1,15 @@
+/*
+* NAME OF CODE ARTIFACT - button_game.dart
+* BRIEF DESCRIPTION - this file creates the tapping game  
+* PROGRAMMERS NAME - Eduardo Sanchez
+* DATE CODE CREATED - October 24th, 2022
+* DATE REVISED - October 24th 
+*                Eduardo Sanchez - creted the game 
+*                November 4th 
+                 Jowaki Merani - created the homepage with all required widgets and buttons
+* KNOWN FAULT - None
+*/
+
 import 'package:flutter/material.dart';
 
 void main() { // main program
