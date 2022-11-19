@@ -60,14 +60,14 @@ const appTitle = 'Mindly'; // this sets the title of the page. set to 'Mindly' f
         height: 50, //height of the save button.
         width: 150, //width of the save button.
           child: ElevatedButton(onPressed: () async {
-                                            var db = await mongo.Db.create(MONGO_URL2);//wait to locate url 
+                                            var db = await mongo.Db.create(MONGO_URL2_journal);//wait to locate url 
                                             await db.open();//opens the connection to url - reuquired db 
                                             inspect(db);//ensures url exists
                                             var status = db.serverStatus();//provides the status of url 
 
                                             // ignore: avoid_print 
                                             print(status);//debug print to ensure sucessful status 
-                                            var collection = db.collection(COLLECTION_NAME2);//accesses collection name 
+                                            var collection = db.collection(COLLECTION_NAME_journal);//accesses collection name 
                                               await collection.insert({"journal" :g_journal});//wait for data 
                                               Navigator.pushNamed(context, 'home_page');//send to db 
                                               
