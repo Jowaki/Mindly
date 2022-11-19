@@ -28,17 +28,18 @@ class _Profile_pgState extends State<Profile_pg> {
   // MaterialColor backgroundColor;
 
   get static => null;
+  var temp;
   
   // get red => null;
 
   @override
   Widget build(BuildContext context) {
-    Widget display1(var temp)
-        {
-              return Card(child: Column(children: [
-                Text("${temp[0]}"),
-              ],));
-        }
+    // Widget display1(var temp)
+    //     {
+    //           return Card(child: Column(children: [
+    //             Text("${temp[0]}"),
+    //           ],));
+    //     }
       const appTitle = 'Mindly'; // this sets the title of the page. set to 'Mindly' for all pages as of 10/03.
       return MaterialApp( // what the page will contain. returns the content below.
       debugShowCheckedModeBanner: false, // disables debug banner when troubleshooting.
@@ -48,26 +49,43 @@ class _Profile_pgState extends State<Profile_pg> {
           title: const Text(appTitle), // title of the app bar.
         ),
         backgroundColor: Colors.blue, // background color of the main page
-        body: Container( // the body of the page, this contains the text field.
+        body: Stack (children: [
+        Container( // the body of the page, this contains the text field.
         height: 70, //height of the save button.
         width: 100, 
         child: Container(
  // container widget for the save button.
-        height: 50, //height of the save button.
-        width: 150, //width of the save button.
-          child: ElevatedButton(onPressed: () async {
+        height: 0, //height of the save button.
+        width: 0, //width of the save button.
+
+        // right: 70,
+        // bottom: 100,
+          child: FloatingActionButton(
+            
+            onPressed: () async {
             var db = await mongo.Db.create(MONGO_URL_Signup);//wait to locate url 
             await db.open();//opens the connection to url - reuquired db 
             inspect(db);//ensures url exists
             var status = db.serverStatus();//provides the status of url 
             print(status);//debug print to ensure sucessful status 
             var collection = db.collection(COLLECTION_NAME_signup);//determine the collection of the entry
-            var temp = await collection.find(mongo.where.eq('name', 'hello')).toList();//look for specific entry 
+            temp = await collection.find(mongo.where.eq('name', 'hello')).toList();//look for specific entry 
             print(temp[0]);}, child: Text('Show'),),)
+        ),
+        Text(
+          "Details\n ${temp}",//print person details 
+          style: TextStyle(//determine text style 
+                    color: Colors.white,
+                    // decoration: TextDecoration.underline,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20,
+                    ),
+          textAlign:TextAlign.center , //align text 
+          
         )
         
         
-        ));
+        ])));
        
         }}
           
