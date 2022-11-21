@@ -1,10 +1,10 @@
 /*
 * NAME OF CODE ARTIFACT - resourcepage.dart
-* BRIEF DESCRIPTION - This creates the frontend of the application that deals with login. 
-*                     It can take in the password and the username - validate it and allow acess to registered users
+* BRIEF DESCRIPTION - This creates the frontend of the application that deals with resources.
+*                     - It displays the resources available
 * PROGRAMMERS NAME - Parveen Kaur 
 * DATE CODE CREATED - November 14th 2022
-* DATE REVISED - 
+* DATE REVISED - November 14th 2022
 * KNOWN FAULT - None
 */
 
@@ -34,10 +34,12 @@ class _MyResourceState extends State<MyResource> {
           // Text widget used to display count
 
           const Text(
-            "Mindly\nResource Page\n",
+            //Text
+            "Mindly\nResource Page\n", //Text
             style: TextStyle(
-              color: Colors.white,
-              fontSize: 33,
+              //text style
+              color: Colors.white, // font color white
+              fontSize: 33, // font size
             ),
           ),
           SingleChildScrollView(
@@ -53,6 +55,7 @@ class _MyResourceState extends State<MyResource> {
               //0.5), //allows the upcoming text to be centered.
 
               child: Column(children: [
+                // create a column of children
                 // IconButton(
                 //   // mainAxisAlignment: MainAxisAlignment.center,
                 //   label: Text("Additional Resources"),
@@ -64,71 +67,88 @@ class _MyResourceState extends State<MyResource> {
                 // ),
                 // child widget.
                 const Text(
-                  "\nCounseling And Psychological Services, KU",
+                  //text
+                  "\nCounseling And Psychological Services, KU", //text
                   style: TextStyle(
-                    color: Colors.white,
-                    decoration: TextDecoration.underline,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20,
+                    //style
+                    color: Colors.white, //white
+                    decoration: TextDecoration.underline, //underline text
+                    fontWeight: FontWeight.bold, //bold text
+                    fontSize: 20, //font size
                   ),
                 ),
                 const Text(
-                  "Website: https://caps.ku.edu/\nContact Number: 785-864-2277\n",
+                  //text
+                  "Website: https://caps.ku.edu/\nContact Number: 785-864-2277\n", //text
                   style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 20,
+                    //text style
+                    color: Colors.white, //font = white
+                    fontSize: 20, // font size
                   ),
                 ),
                 Image.asset(
+                  // image
                   'assets/qr.png',
                 ),
 
                 const Text(
-                  "CAPS- 24/7 Support, KU",
+                  //text
+                  "CAPS- 24/7 Support, KU", //text
                   style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                    decoration: TextDecoration.underline,
-                    fontSize: 20,
+                    //text style
+                    color: Colors.white, // white
+                    fontWeight: FontWeight.bold, //bold text
+                    decoration: TextDecoration.underline, //underline text
+                    fontSize: 20, // font size
                   ),
                 ),
                 const Text(
-                  "Telephone Support: 1.866.408.2828\nDownload MY SSP to Call. Chat. Anytime. Anywhere\n",
+                  //text
+                  "Telephone Support: 1.866.408.2828\nDownload MY SSP to Call. Chat. Anytime. Anywhere\n", //text
                   style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 20,
+                    //text style
+                    color: Colors.white, //font color
+                    fontSize: 20, //font size
                   ),
                 ),
                 const Text(
-                  "Suicide Prevention Helpline",
+                  //text
+                  "Suicide Prevention Helpline", //text
                   style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                    decoration: TextDecoration.underline,
-                    fontSize: 20,
+                    //text style
+                    color: Colors.white, // text color
+                    fontWeight: FontWeight.bold, //bold text
+                    decoration: TextDecoration.underline, //underline text
+                    fontSize: 20, // text size
                   ),
                 ),
                 const Text(
-                  "Dial: 988\n",
+                  //text
+                  "Dial: 988\n", //text
                   style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 20,
+                    //text style
+                    color: Colors.white, // text color
+                    fontSize: 20, // text size
                   ),
                 ),
                 const Text(
-                  "Emergency Services:",
+                  // text
+                  "Emergency Services:", //text
                   style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                    decoration: TextDecoration.underline,
-                    fontSize: 20,
+                    // text style
+                    color: Colors.white, // text color
+                    fontWeight: FontWeight.bold, //bold text
+                    decoration: TextDecoration.underline, // underline text
+                    fontSize: 20, // text size
                   ),
                 ),
                 const Text(
-                  "Dial: 999\n",
+                  // text
+                  "Dial: 999\n", // text
                   style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 20,
+                    // text style
+                    color: Colors.white, // color
+                    fontSize: 20, // size
                   ),
                 ),
 
@@ -162,68 +182,84 @@ class _MyResourceState extends State<MyResource> {
             ),
           ),
           Positioned(
-              bottom: 10,
-              left: 2,
+              // position of button
+              bottom: 10, // distance from bottom
+              left: 2, // distance from top
               child: IconButton(
+                // Icon buttom
                 // mainAxisAlignment: MainAxisAlignment.center,
-                icon: Image.asset('assets/music.png'),
-                iconSize: 50,
-                onPressed: () {},
+                icon: Image.asset('assets/music.png'), //image
+                iconSize: 50, //size
+                onPressed: () {}, //functionality
               )),
           Positioned(
-              bottom: 10,
-              left: 52,
+              // position of button
+              bottom: 10, // distance from bottom
+              left: 52, // distance from left
               child: IconButton(
+                // button
                 // mainAxisAlignment: MainAxisAlignment.center,
-                icon: Image.asset('assets/journal.png'),
-                iconSize: 50,
+                icon: Image.asset('assets/journal.png'), //image
+                iconSize: 50, //size
                 onPressed: () {
+                  //functionality
                   Navigator.pushNamed(context, 'journal_page');
                 },
               )),
           Positioned(
-              bottom: 10,
-              left: 102,
+              //position of button
+              bottom: 10, //distance from bottom
+              left: 102, //distance from left
               child: IconButton(
+                // button
                 // mainAxisAlignment: MainAxisAlignment.center,
-                icon: Image.asset('assets/game.png'),
-                iconSize: 50,
+                icon: Image.asset('assets/game.png'), //image
+                iconSize: 50, //size
                 onPressed: () {
+                  //functionality
                   Navigator.pushNamed(context, 'game_page');
                 },
               )),
           Positioned(
-              bottom: 10,
-              left: 152,
+              //position of button
+              bottom: 10, //distance from bottom
+              left: 152, //distance from left
               child: IconButton(
+                //button
                 // mainAxisAlignment: MainAxisAlignment.center,
-                icon: Image.asset('assets/home.png'),
-                iconSize: 50,
+                icon: Image.asset('assets/home.png'), //image
+                iconSize: 50, //size
                 onPressed: () {
+                  //functionality
                   Navigator.pushNamed(context, 'home_page');
                 },
               )),
           Positioned(
-              bottom: 10,
-              left: 202,
+              //position of button
+              bottom: 10, // distance from bottom
+              left: 202, //distance from left
               child: IconButton(
+                //button
                 // mainAxisAlignment: MainAxisAlignment.center,
-                icon: Image.asset('assets/info.png'),
-                iconSize: 50,
+                icon: Image.asset('assets/info.png'), //image
+                iconSize: 50, //size
                 onPressed: () {
+                  //functionality
                   Navigator.pushNamed(context, 'resource_page');
                 },
               )),
           Positioned(
-              top: 10,
-              right: 52,
+              //position of button
+              top: 10, //distance from top
+              right: 52, //distance from right
               child: ElevatedButton.icon(
                 // mainAxisAlignment: MainAxisAlignment.center,
-                icon: Image.asset('assets/pointy.png'),
+                icon: Image.asset('assets/pointy.png'), //image
                 onPressed: () {
+                  //functionality
                   Navigator.pushNamed(context, 'personal_page');
                 },
-                label: const Text("Additional Resources"),
+                label: const Text("Additional Resources"), //button label
               )),
         ]),
       ),

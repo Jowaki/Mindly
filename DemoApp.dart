@@ -1,3 +1,5 @@
+// ignore_for_file: unused_local_variable
+
 /*
 * NAME OF CODE ARTIFACT - DemoApp.dart
 * BRIEF DESCRIPTION - this file creates the home page for the application  
@@ -5,12 +7,19 @@
 * DATE CODE CREATED - November 4th, 2022
 * DATE REVISED - November 4th 
                  Jowaki Merani - created the homepage with all required widgets and buttons
+                 Nov 20th 
+                 Jowaki Merani - able to redirect to journal page and store journal 
 * KNOWN FAULT - None
 */
 
+import 'dart:developer';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/constant.dart';
+import 'package:flutter_application_1/journal_page.dart';
 import 'package:flutter_clean_calendar/flutter_clean_calendar.dart';
+import 'package:mongo_dart/mongo_dart.dart' as mongo;
 
 
 // ignore: use_key_in_widget_constructors
@@ -25,20 +34,48 @@ class _DemoAppState extends State<DemoApp> {//class for the home page
   late DateTime selectedDay = DateTime.now();//getting the current data as the selected date 
   late List <CleanCalendarEvent> selectedEvent;//to help select an event in the future 
 
-  final Map<DateTime,List<CleanCalendarEvent>> events = {//create events 
-    DateTime (DateTime.now().year,DateTime.now().month,DateTime.now().day)://events 
-        [        ],
+  late Map<DateTime,List<CleanCalendarEvent>> events = {};//create events 
+  //   DateTime (DateTime.now().year,DateTime.now().month,DateTime.now().day)://events 
+  //       [     
+  //         // CleanCalendarEvent('ENTRY',
+  //         // startTime: DateTime( DateTime.now().year,DateTime.now().month,DateTime.now().day),
+  //         // endTime:  DateTime( DateTime.now().year,DateTime.now().month,DateTime.now().day),
+  //         //   // description: 'ENTRY',
+  //         //   // color: Colors.blue[700]),
+  //         // ),
+  //       ],
 
-    DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day + 2)://events 
-    [    ],
-  };
+  //   DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day + 2)://events 
+  //   [ 
+      
+      
+      
+  //   ],
+  // };
+
+  // Future<void> _chkJournal() async {
+  //   var db = await mongo.Db.create(MONGO_URL2_journal);//wait to locate url 
+  //   await db.open();//opens the connection to url - reuquired db 
+  //   inspect(db);//ensures url exists
+  //   var status = db.serverStatus();//provides the status of url 
+
+  //   // ignore: avoid_print 
+  //   // print(status);//debug print to ensure sucessful status 
+  //   var collection = db.collection(COLLECTION_NAME_journal);//accesses collection name 
+  //   var temp = collection.find(mongo.where.ne('journal', null));
+
+   
+  //   }
+  
+
+  
 
   void _handleData(date){//maps the selected date 
     setState(() {
       selectedDay = date;//dynamically updating whne a date is selected 
       selectedEvent = events[selectedDay] ?? [];//assists above
     });
-    print(selectedDay);//desplays selected date to debug 
+    // print(selectedDay);//desplays selected date to debug 
   }
   @override
   void initState() {//refreshing the selected date on a new click 
@@ -72,11 +109,18 @@ class _DemoAppState extends State<DemoApp> {//class for the home page
             eventDoneColor: Colors.amber,//completed event turns amber 
             bottomBarColor: Colors.deepOrange,//bottom bar is orange 
             onRangeSelected: (range) {//bottom bar is populated by teh selected date 
-              print('selected Day ${range.from},${range.to}');//print selected date 
+              // print('selected Day ${range.from},${range.to}');//print selected date 
             },
-            onDateSelected: (date){
-              return _handleData(date);//return the selected date
-            },
+            onDateSelected: (date) async {
+                     events = await Navigator.push(//ass event to date 
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => MyJournal(),//redirect to journal pg 
+                    ));
+                    // Navigator.pushNamed(context, 'journal_page');
+
+                    return _handleData(date);//return the selected date
+                  },
             events: events,//revording teh events 
             isExpanded: true,//possibility to expand 
             dayOfWeekStyle: TextStyle(//formatting the text 
@@ -154,7 +198,19 @@ class _DemoAppState extends State<DemoApp> {//class for the home page
                 // mainAxisAlignment: MainAxisAlignment.center,
                 icon: Image.asset('assets/info.png'),//image to be used 
                 iconSize: 50,//buttom size
-                onPressed: () {},//functionality on pressed 
+                onPressed: () {Navigator.pushNamed(context, 'resource_page');},//functionality on pressed 
+        )
+              ),
+              Positioned(//position of button 
+  
+          bottom:10,//positioning the button from the bottom  
+          left:252,//positioning the button from the left
+          child:
+              IconButton(
+                // mainAxisAlignment: MainAxisAlignment.center,
+                icon: Image.asset('assets/profile.png'),//image to be used 
+                iconSize: 50,//buttom size
+                onPressed: () {Navigator.pushNamed(context, 'profile_page');},//functionality on pressed 
         )
               )
 

@@ -126,7 +126,7 @@ class _MyLoginState extends State<MyLogin> {
                         //the icon inside the button
                         color: Colors.white, // icon color set to white.
                         onPressed: () {
-                          Navigator.pushNamed(context, 'home_page');
+                          Navigator.pushNamed(context, 'checkin_page');
                         }, // allows user to click the button. Nothing happens right now.
                         icon: const Icon(Icons
                             .arrow_forward), // icon inside the button is an arrow.

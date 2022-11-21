@@ -5,7 +5,8 @@
 *                     
 * PROGRAMMERS NAME - Parveen Kaur
 * DATE CODE CREATED - November 13th 2022
-* DATE REVISED - 
+* DATE REVISED - November 20th 2022
+* KNOWN FAULTS - None
 */
 
 import 'package:flutter/material.dart';
@@ -21,11 +22,11 @@ class MyCheckIn extends StatefulWidget {
 }
 
 class _MyCheckInState extends State<MyCheckIn> {
-  String g_feeling = "";
-  String g_worry = "";
-  String g_happy = "";
-  String g_sociliazing = "";
-  String g_corner = "";
+  String g_feeling = ""; // global variable
+  String g_worry = ""; // global variable
+  String g_happy = ""; // global variable
+  String g_sociliazing = ""; // global variable
+  String g_corner = ""; // global variable
   //class definition.
   @override
   Widget build(BuildContext context) {
@@ -42,16 +43,18 @@ class _MyCheckInState extends State<MyCheckIn> {
             padding: const EdgeInsets.only(left: 35, top: 80), // edge insets
             child: const Text(
               //text widget allows to customize "Mindly" string.
-              "Daily Check-in\n",
+              "Daily Check-in\n", //text
               style: TextStyle(
+                  //style
                   color: Colors.white,
                   fontSize:
                       33), //string "Mindly" set in white and font size 33.
             ),
           ),
           const Text(
+            //text
             "Mindly",
-            style: TextStyle(color: Colors.white, fontSize: 33),
+            style: TextStyle(color: Colors.white, fontSize: 33), //style
           ),
           SingleChildScrollView(
             // allows the user to scroll down if the information can't fit in the background.
@@ -81,7 +84,8 @@ class _MyCheckInState extends State<MyCheckIn> {
                           10), // size of the border set to 10.
                     ),
                   ),
-                  onChanged: (feeling) => (g_feeling = feeling),
+                  onChanged: (feeling) =>
+                      (g_feeling = feeling), // store value in global variable
                 ),
 
                 const SizedBox(
@@ -89,8 +93,9 @@ class _MyCheckInState extends State<MyCheckIn> {
                   height: 30, // height is set to 30.
                 ),
                 const Text(
+                  //text
                   'What has been worrying me lately?',
-                  style: TextStyle(color: Colors.white, fontSize: 27),
+                  style: TextStyle(color: Colors.white, fontSize: 27), //style
                 ),
                 TextField(
                   //creates textField widget
@@ -105,7 +110,8 @@ class _MyCheckInState extends State<MyCheckIn> {
                           10), // size of the border set to 10.
                     ),
                   ),
-                  onChanged: (worry) => (g_worry = worry),
+                  onChanged: (worry) =>
+                      (g_worry = worry), // store value in global variable
                 ),
 
                 const SizedBox(
@@ -113,8 +119,9 @@ class _MyCheckInState extends State<MyCheckIn> {
                   height: 30, // height is set to 30.
                 ),
                 const Text(
+                  //text
                   'What happened today that made me really happy?',
-                  style: TextStyle(color: Colors.white, fontSize: 27),
+                  style: TextStyle(color: Colors.white, fontSize: 27), //style
                 ),
                 TextField(
                   //creates textField widget
@@ -129,7 +136,8 @@ class _MyCheckInState extends State<MyCheckIn> {
                           10), // size of the border set to 10.
                     ),
                   ),
-                  onChanged: (happy) => (g_happy = happy),
+                  onChanged: (happy) =>
+                      (g_happy = happy), // store value in global variable
                 ),
 
                 const SizedBox(
@@ -137,8 +145,9 @@ class _MyCheckInState extends State<MyCheckIn> {
                   height: 30, // height is set to 30.
                 ),
                 const Text(
+                  //text
                   'Have I been socializing less?',
-                  style: TextStyle(color: Colors.white, fontSize: 27),
+                  style: TextStyle(color: Colors.white, fontSize: 27), //style
                 ),
                 TextField(
                   // textfield widget.
@@ -153,7 +162,8 @@ class _MyCheckInState extends State<MyCheckIn> {
                           10), //borders the text box with size 10.
                     ),
                   ),
-                  onChanged: (socializing) => (g_sociliazing = socializing),
+                  onChanged: (socializing) => (g_sociliazing =
+                      socializing), // store value in global variable
                 ),
 
                 const SizedBox(
@@ -161,8 +171,9 @@ class _MyCheckInState extends State<MyCheckIn> {
                   height: 40, // set the size to 40.
                 ),
                 const Text(
+                  //text
                   'Who do I have in my corner?',
-                  style: TextStyle(color: Colors.white, fontSize: 27),
+                  style: TextStyle(color: Colors.white, fontSize: 27), //style
                 ),
                 TextField(
                   //creates textField widget
@@ -178,7 +189,7 @@ class _MyCheckInState extends State<MyCheckIn> {
                     ),
                   ),
                   onChanged: (corner) {
-                    g_corner = corner;
+                    g_corner = corner; // store value in global variable
                   },
                 ),
 
@@ -214,18 +225,21 @@ class _MyCheckInState extends State<MyCheckIn> {
                         //the icon inside the button
                         color: Colors.white, // icon color set to white.
                         onPressed: () async {
+                          //when button is pressed connect to database
                           var db = await mongo.Db.create(MONGO_URL_CHECKIN);
-                          await db.open();
-                          var userCollection =
+                          await db.open(); //wait for it to open
+                          var userCollection = // connect to the specific table
                               db.collection(COLLECTION_NAME_checkin);
                           await userCollection.insert({
+                            //insert global values into the respective fields
                             "feeling ": g_feeling,
                             "worry": g_worry,
                             "happy": g_happy,
                             "socializing": g_sociliazing,
                             "corner": g_corner,
                           });
-                          Navigator.pushNamed(context, 'home_page');
+                          Navigator.pushNamed(
+                              context, 'home_page'); // upon pushed, redirect
                           //make database connection
                         }, // allows user to click the button. Nothing happens right now.
                         icon: const Icon(Icons

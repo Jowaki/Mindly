@@ -1,10 +1,10 @@
 /*
 * NAME OF CODE ARTIFACT - personal_page.dart
-* BRIEF DESCRIPTION - This creates the frontend of the application that deals with login. 
-*                     It can take in the password and the username - validate it and allow acess to registered users
+* BRIEF DESCRIPTION - - This creates the frontend of the application that deals with additional resources.
+*                     - It displays the resources available
 * PROGRAMMERS NAME - Parveen Kaur 
 * DATE CODE CREATED - November 14th 2022
-* DATE REVISED - 
+* DATE REVISED - November 14th 2022
 * KNOWN FAULT - None
 */
 
@@ -68,63 +68,78 @@ class _MyPersonalState extends State<MyPersonal> {
                   ),
                 ),
                 const Text(
-                  "\u2022 Take 5 deep breaths\nBreathe in, hold for 5 seconds and slowly breathe out\n",
+                  //create text field
+                  "\u2022 Take 5 deep breaths\nBreathe in, hold for 5 seconds and slowly breathe out\n", // text
                   style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 20,
+                    //style
+                    color: Colors.white, //white font
+                    fontSize: 20, //font size
                   ),
                 ),
                 const Text(
-                  "Play our tapping game\n",
+                  //text field
+                  "Play our tapping game\n", //text
                   style: TextStyle(
-                    color: Colors.white,
-                    decoration: TextDecoration.underline,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20,
+                    //style
+                    color: Colors.white, //white font
+                    decoration: TextDecoration.underline, //create an underline
+                    fontWeight: FontWeight.bold, //bold the font
+                    fontSize: 20, // font size
                   ),
                 ),
                 Positioned(
-                    bottom: 10,
-                    left: 102,
+                    //position of button
+                    bottom: 10, // distance from bottom
+                    left: 102, //distance from left
                     child: IconButton(
+                      //child clickable button
                       // mainAxisAlignment: MainAxisAlignment.center,
-                      icon: Image.asset('assets/game.png'),
-                      iconSize: 50,
+                      icon: Image.asset('assets/game.png'), //image
+                      iconSize: 50, //size
                       onPressed: () {
-                        Navigator.pushNamed(context, 'game_page');
+                        //press functionality
+                        Navigator.pushNamed(context, 'game_page'); //redirection
                       },
                     )),
                 const Text(
-                  "Get active\n",
+                  //text
+                  "Get active\n", //text
                   style: TextStyle(
-                    color: Colors.white,
-                    decoration: TextDecoration.underline,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20,
+                    //style
+                    color: Colors.white, //white font
+                    decoration: TextDecoration.underline, //underline text
+                    fontWeight: FontWeight.bold, //bold text
+                    fontSize: 20, //font size
                   ),
                 ),
                 const Text(
+                  //text
                   "\u2022Take a trip to the Recreation Centre located on campus\n\u2022Go for a bike ride\n\u2022Go for a 40 minute brisk walk to absord some sun\n\u2022Enroll into a dance class",
                   style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 20,
+                    //style
+                    color: Colors.white, //white font
+                    fontSize: 20, //font size
                   ),
                 ),
                 const Text(
-                  "\n3-3-3 Rule",
+                  //text
+                  "\n3-3-3 Rule", //text
                   style: TextStyle(
-                    color: Colors.white,
-                    decoration: TextDecoration.underline,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20,
+                    //style
+                    color: Colors.white, //white
+                    decoration: TextDecoration.underline, //underline font
+                    fontWeight: FontWeight.bold, //bold font
+                    fontSize: 20, //font size
                   ),
                 ),
                 // https://adultmentalhealth.org/managing-and-reducing-anxiety/
                 const Text(
+                  //text
                   "\u2022Look around you and name three things you see\n\u2022Then, name three sounds you hear\n\u2022Finally, move three parts of your body (eg, ankle, fingers or arm)\n",
                   style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 20,
+                    //style
+                    color: Colors.white, //font color
+                    fontSize: 20, //font size
                   ),
                 ),
                 Row(
@@ -135,55 +150,69 @@ class _MyPersonalState extends State<MyPersonal> {
             ),
           ),
           Positioned(
-              bottom: 10,
-              left: 2,
+              // position of button
+              bottom: 10, // distance from bottom
+              left: 2, // distance from top
               child: IconButton(
+                // Icon buttom
                 // mainAxisAlignment: MainAxisAlignment.center,
-                icon: Image.asset('assets/music.png'),
-                iconSize: 50,
-                onPressed: () {},
+                icon: Image.asset('assets/music.png'), //image
+                iconSize: 50, //size
+                onPressed: () {}, //functionality
               )),
           Positioned(
-              bottom: 10,
-              left: 52,
+              // position of button
+              bottom: 10, // distance from bottom
+              left: 52, // distance from left
               child: IconButton(
+                // button
                 // mainAxisAlignment: MainAxisAlignment.center,
-                icon: Image.asset('assets/journal.png'),
-                iconSize: 50,
+                icon: Image.asset('assets/journal.png'), //image
+                iconSize: 50, //size
                 onPressed: () {
+                  //functionality
                   Navigator.pushNamed(context, 'journal_page');
                 },
               )),
           Positioned(
-              bottom: 10,
-              left: 102,
+              //position of button
+              bottom: 10, //distance from bottom
+              left: 102, //distance from left
               child: IconButton(
+                // button
                 // mainAxisAlignment: MainAxisAlignment.center,
-                icon: Image.asset('assets/game.png'),
-                iconSize: 50,
+                icon: Image.asset('assets/game.png'), //image
+                iconSize: 50, //size
                 onPressed: () {
+                  //functionality
                   Navigator.pushNamed(context, 'game_page');
                 },
               )),
           Positioned(
-              bottom: 10,
-              left: 152,
+              //position of button
+              bottom: 10, //distance from bottom
+              left: 152, //distance from left
               child: IconButton(
+                //button
                 // mainAxisAlignment: MainAxisAlignment.center,
-                icon: Image.asset('assets/home.png'),
-                iconSize: 50,
+                icon: Image.asset('assets/home.png'), //image
+                iconSize: 50, //size
                 onPressed: () {
+                  //functionality
                   Navigator.pushNamed(context, 'home_page');
                 },
               )),
           Positioned(
-              bottom: 10,
-              left: 202,
+              //position of button
+              bottom: 10, // distance from bottom
+              left: 202, //distance from left
               child: IconButton(
+                //button
                 // mainAxisAlignment: MainAxisAlignment.center,
-                icon: Image.asset('assets/info.png'),
-                iconSize: 50,
+                icon: Image.asset('assets/info.png'), //image
+                iconSize: 50, //size
                 onPressed: () {
+                  //functionality
                   Navigator.pushNamed(context, 'resource_page');
                 },
               )),

@@ -17,6 +17,7 @@ import 'package:flutter/material.dart';
 */
 import 'dart:developer';
 import 'package:flutter_application_1/constant.dart';
+import 'package:flutter_clean_calendar/clean_calendar_event.dart';
 import 'package:mongo_dart/mongo_dart.dart' as mongo;
 // import 'package:mongo_dart/mongo_dart.dart';
 
@@ -68,8 +69,24 @@ const appTitle = 'Mindly'; // this sets the title of the page. set to 'Mindly' f
                                             // ignore: avoid_print 
                                             print(status);//debug print to ensure sucessful status 
                                             var collection = db.collection(COLLECTION_NAME_journal);//accesses collection name 
-                                              await collection.insert({"journal" :g_journal});//wait for data 
-                                              Navigator.pushNamed(context, 'home_page');//send to db 
+                                              await collection.insert({"journal" :g_journal, "Day":DateTime.now().day, "Month":DateTime.now().month, "yr":DateTime.now().year});//wait for data 
+
+                                            final Map<DateTime,List<CleanCalendarEvent>> events = {//create events 
+                                            DateTime (DateTime.now().year,DateTime.now().month,DateTime.now().day)://events 
+                                                [//create a journal entry for the day      
+                                                  CleanCalendarEvent('ENTRY',
+                                                  startTime: DateTime( DateTime.now().year,DateTime.now().month,DateTime.now().day),
+                                                  endTime:  DateTime( DateTime.now().year,DateTime.now().month,DateTime.now().day),
+                                                  description: g_journal,
+                                                    // color: Colors.blue[700]),
+                                                  ),
+                                                ],
+                                            }; 
+                                            // String textToSendBack = textFieldController.text;
+                                            
+                                            Navigator.pop(context, events);//send event back to screen 
+                                             
+                                            // Navigator.pushNamed(context, 'home_page');//send to db 
                                               
                                            }, child: Text('Save'),),)], // The style of the button and the text in the button.
         )

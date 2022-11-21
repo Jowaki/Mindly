@@ -28,19 +28,14 @@ class _Profile_pgState extends State<Profile_pg> {
   // MaterialColor backgroundColor;
 
   get static => null;
-  var temp;
+  // ignore: prefer_typing_uninitialized_variables
+  var temp ;
   
   // get red => null;
 
   @override
   Widget build(BuildContext context) {
-    // Widget display1(var temp)
-    //     {
-    //           return Card(child: Column(children: [
-    //             Text("${temp[0]}"),
-    //           ],));
-    //     }
-      const appTitle = 'Mindly'; // this sets the title of the page. set to 'Mindly' for all pages as of 10/03.
+          const appTitle = 'Mindly'; // this sets the title of the page. set to 'Mindly' for all pages as of 10/03.
       return MaterialApp( // what the page will contain. returns the content below.
       debugShowCheckedModeBanner: false, // disables debug banner when troubleshooting.
       title: appTitle, // title is set to 'Mindly'.
@@ -54,7 +49,7 @@ class _Profile_pgState extends State<Profile_pg> {
         height: 70, //height of the save button.
         width: 100, 
         child: Container(
- // container widget for the save button.
+        // container widget for the save button.
         height: 0, //height of the save button.
         width: 0, //width of the save button.
 
@@ -63,17 +58,27 @@ class _Profile_pgState extends State<Profile_pg> {
           child: FloatingActionButton(
             
             onPressed: () async {
-            var db = await mongo.Db.create(MONGO_URL_Signup);//wait to locate url 
-            await db.open();//opens the connection to url - reuquired db 
-            inspect(db);//ensures url exists
-            var status = db.serverStatus();//provides the status of url 
-            print(status);//debug print to ensure sucessful status 
-            var collection = db.collection(COLLECTION_NAME_signup);//determine the collection of the entry
-            temp = await collection.find(mongo.where.eq('name', 'hello')).toList();//look for specific entry 
-            print(temp[0]);}, child: Text('Show'),),)
+                var db = await mongo.Db.create(MONGO_URL_Signup);//wait to locate url 
+                await db.open();//opens the connection to url - reuquired db 
+                inspect(db);//ensures url exists
+                var status = db.serverStatus();//provides the status of url 
+                // print(status);//debug print to ensure sucessful status 
+                var collection = db.collection(COLLECTION_NAME_signup);//determine the collection of the entry
+                temp = await collection.find(mongo.where.eq('name', 'hello')).toList();//look for specific entry 
+                print(temp[0]);//debug
+                await db.close();//close db
+
+                // const Text("Details\n $temp");
+                // Navigator.pushAndRemoveUntil(
+                //               context,
+                //               MaterialPageRoute(builder: (context) => Profile_pg()),
+                //               (Route<dynamic> route) => false,
+                //             );
+                            }, child: Text(''),),)
         ),
         Text(
-          "Details\n ${temp}",//print person details 
+          // setState(() {});
+          "Details\n $temp",//print person details 
           style: TextStyle(//determine text style 
                     color: Colors.white,
                     // decoration: TextDecoration.underline,
