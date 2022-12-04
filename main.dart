@@ -13,6 +13,7 @@
 */
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/personal_page.dart';
+import 'package:flutter_application_1/play.dart';
 import 'package:flutter_application_1/profile.dart';
 import 'package:flutter_application_1/resourcepage.dart';
 import 'button_game.dart';
@@ -21,6 +22,8 @@ import 'sign_up_page.dart';
 import 'journal_page.dart';
 import 'DemoApp.dart';
 import 'check_in.dart';
+import 'music_page.dart';
+import 'play.dart';
 // import 'mongodb.dart';
 
 Future<void> main() async {
@@ -55,7 +58,9 @@ class MyApp extends StatelessWidget {
           'checkin_page': (context) => const MyCheckIn(),
           "resource_page": (context) => const MyResource(),
           "personal_page": (context) => const MyPersonal(),
-          "profile_page" : (context) => const Profile_pg(),
+          "profile_page": (context) => const Profile_pg(),
+          "music_page": (context) => const MyMusic(),
+          "play_page": (context) => const MyPlay(),
         });
   }
 }
