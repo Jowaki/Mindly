@@ -9,6 +9,8 @@
                  Jowaki Merani - created the homepage with all required widgets and buttons
                  Nov 20th 
                  Jowaki Merani - able to redirect to journal page and store journal 
+                 January 28th
+                 Parveen Kaur - added constructors that take parameters.
 * KNOWN FAULT - None
 */
 
@@ -16,56 +18,34 @@ import 'dart:developer';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_application_1/constant.dart';
 import 'package:flutter_application_1/journal_page.dart';
+import 'package:flutter_application_1/profileMenu_page.dart';
 import 'package:flutter_clean_calendar/flutter_clean_calendar.dart';
 import 'package:mongo_dart/mongo_dart.dart' as mongo;
 
 // ignore: use_key_in_widget_constructors
 class DemoApp extends StatefulWidget {
+  String email; // email to be sent to profile page
+  DemoApp({required this.email}); // constructor
   @override
   // ignore: library_private_types_in_public_api
-  _DemoAppState createState() => _DemoAppState();
+  _DemoAppState createState() => _DemoAppState(
+      email: '${email}'); // add a constructor that takes a parameter
 }
 
 class _DemoAppState extends State<DemoApp> {
   //class for the home page
-
+  String email;
   late DateTime selectedDay =
       DateTime.now(); //getting the current data as the selected date
   late List<CleanCalendarEvent>
       selectedEvent; //to help select an event in the future
 
-  late Map<DateTime, List<CleanCalendarEvent>> events = {}; //create events
-  //   DateTime (DateTime.now().year,DateTime.now().month,DateTime.now().day)://events
-  //       [
-  //         // CleanCalendarEvent('ENTRY',
-  //         // startTime: DateTime( DateTime.now().year,DateTime.now().month,DateTime.now().day),
-  //         // endTime:  DateTime( DateTime.now().year,DateTime.now().month,DateTime.now().day),
-  //         //   // description: 'ENTRY',
-  //         //   // color: Colors.blue[700]),
-  //         // ),
-  //       ],
+  late Map<DateTime, List<CleanCalendarEvent>> events = {};
 
-  //   DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day + 2)://events
-  //   [
-
-  //   ],
-  // };
-
-  // Future<void> _chkJournal() async {
-  //   var db = await mongo.Db.create(MONGO_URL2_journal);//wait to locate url
-  //   await db.open();//opens the connection to url - reuquired db
-  //   inspect(db);//ensures url exists
-  //   var status = db.serverStatus();//provides the status of url
-
-  //   // ignore: avoid_print
-  //   // print(status);//debug print to ensure sucessful status
-  //   var collection = db.collection(COLLECTION_NAME_journal);//accesses collection name
-  //   var temp = collection.find(mongo.where.ne('journal', null));
-
-  //   }
-
+  _DemoAppState({required this.email}); //create events// constructor
   void _handleData(date) {
     //maps the selected date
     setState(() {
@@ -86,13 +66,82 @@ class _DemoAppState extends State<DemoApp> {
   Widget build(BuildContext context) {
     //creating the main page
     return Scaffold(
+        bottomNavigationBar: BottomAppBar(
+            color: Colors.blue,
+            child: Row(
+              children: <Widget>[
+                IconButton(
+                  // button
+                  // mainAxisAlignment: MainAxisAlignment.center,
+                  icon: Image.asset('assets/game.png'), //image
+                  iconSize: 50, //size
+                  onPressed: () {
+                    //functionality
+                    Navigator.pushNamed(context, 'game_page');
+                  },
+                ),
+                IconButton(
+                  // button
+                  // mainAxisAlignment: MainAxisAlignment.center,
+                  icon: Image.asset('assets/journal.png'), //image
+                  iconSize: 50, //size
+                  onPressed: () {
+                    //functionality
+                    Navigator.pushNamed(context, 'journal_page');
+                  },
+                ),
+                IconButton(
+                  //button
+                  // mainAxisAlignment: MainAxisAlignment.center,
+                  icon: Image.asset('assets/home.png'), //image
+                  iconSize: 50, //size
+                  onPressed: () {
+                    //functionality
+                    Navigator.pushNamed(context, 'home_page');
+                  },
+                ),
+                IconButton(
+                  // Icon buttom
+                  // mainAxisAlignment: MainAxisAlignment.center,
+                  icon: Image.asset('assets/music.png'), //image
+                  iconSize: 50, //size
+                  onPressed: () {
+                    Navigator.pushNamed(context, 'music_page');
+                  }, //functionality
+                ),
+                IconButton(
+                  tooltip: 'Open navigation menu',
+                  icon: Image.asset('assets/info.png'), //image
+                  iconSize: 50, //size
+                  onPressed: () {
+                    //functionality
+                    Navigator.pushNamed(context, 'resource_page');
+                  },
+                ),
+              ],
+            )),
         //builds the base
         backgroundColor:
             Color.fromARGB(255, 172, 212, 245), //set background color
         appBar: AppBar(
           //creates the app bar at the top
           title: Text('MINDLY'), //test in the app bar
+          automaticallyImplyLeading: false,
           centerTitle: true, //locating of the text
+          actions: <Widget>[
+            IconButton(
+              icon: Image.asset('assets/profile.png'), //image
+              onPressed: () {
+                // do something
+                // print('${email}');
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => SettingsPageUI(
+                          email: ('${email}'),
+                        )));
+                // Navigator.pushNamed(context, 'profileMenu_page');
+              },
+            ),
+          ],
         ),
         body: //creating the body
             Stack(
@@ -157,88 +206,6 @@ class _DemoAppState extends State<DemoApp> {
                 ),
               ),
             ),
-            Positioned(
-                //position of button
-
-                bottom: 10, //positioning the button from the bottom
-                left: 2, //positioning the button from the left
-                child: IconButton(
-                  //cretaing a button with an icon
-                  // mainAxisAlignment: MainAxisAlignment.center,
-                  icon: Image.asset('assets/music.png'), //image to be used
-                  iconSize: 50, //buttom size
-                  onPressed: () {
-                    Navigator.pushNamed(context, 'music_page');
-                  }, //functionality on pressed
-                )),
-            Positioned(
-                //position of button
-
-                bottom: 10, //positioning the button from the bottom
-                left: 52, //positioning the button from the left
-                child: IconButton(
-                  //cretaing a button with an icon
-                  // mainAxisAlignment: MainAxisAlignment.center,
-                  icon: Image.asset('assets/journal.png'), //image to be used
-                  iconSize: 50, //buttom size
-                  onPressed: () {
-                    Navigator.pushNamed(context, 'journal_page');
-                  }, //functionality on pressed
-                )),
-            Positioned(
-                //position of button
-
-                bottom: 10, //positioning the button from the bottom
-                left: 102, //positioning the button from the left
-                child: IconButton(
-                  //cretaing a button with an icon
-                  // mainAxisAlignment: MainAxisAlignment.center,
-                  icon: Image.asset('assets/game.png'), //image to be used
-                  iconSize: 50, //buttom size
-                  onPressed: () {
-                    Navigator.pushNamed(context, 'game_page');
-                  }, //functionality on pressed
-                )),
-            Positioned(
-                //position of button
-
-                bottom: 10, //positioning the button from the bottom
-                left: 152, //positioning the button from the left
-                child: IconButton(
-                  //cretaing a button with an icon
-                  // mainAxisAlignment: MainAxisAlignment.center,
-                  icon: Image.asset('assets/home.png'), //image to be used
-                  iconSize: 50, //buttom size
-                  onPressed: () {
-                    Navigator.pushNamed(context, 'home_page');
-                  }, //functionality on pressed
-                )),
-            Positioned(
-                //position of button
-
-                bottom: 10, //positioning the button from the bottom
-                left: 202, //positioning the button from the left
-                child: IconButton(
-                  // mainAxisAlignment: MainAxisAlignment.center,
-                  icon: Image.asset('assets/info.png'), //image to be used
-                  iconSize: 50, //buttom size
-                  onPressed: () {
-                    Navigator.pushNamed(context, 'resource_page');
-                  }, //functionality on pressed
-                )),
-            Positioned(
-                //position of button
-
-                bottom: 10, //positioning the button from the bottom
-                left: 252, //positioning the button from the left
-                child: IconButton(
-                  // mainAxisAlignment: MainAxisAlignment.center,
-                  icon: Image.asset('assets/profile.png'), //image to be used
-                  iconSize: 50, //buttom size
-                  onPressed: () {
-                    Navigator.pushNamed(context, 'profile_page');
-                  }, //functionality on pressed
-                ))
           ],
         ));
   }

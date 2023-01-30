@@ -5,11 +5,22 @@
 * PROGRAMMERS NAME - Eduardo Sanchez
 * DATE CODE CREATED - Sept 21st 2022
 * DATE REVISED - Sept 21st
-*                Eduardo Sanchez - Text box for password and username 
+*                Eduardo Sanchez - Text box for password and username
+*                Jan 28th 
+*                Jowaki Merani - Added condition to check for valid entry 
+\
 * KNOWN FAULT - Not connected to database
 */
 
 import 'package:flutter/material.dart';
+import 'dart:developer';
+// import 'package:flutter/cupertino.dart';
+// import 'package:flutter/material.dart';
+import 'package:mongo_dart/mongo_dart.dart' as mongo;
+// import 'package:mongo_dart/mongo_dart.dart';
+
+import 'check_in.dart';
+import 'constant.dart';
 
 class MyLogin extends StatefulWidget {
   //class for the login landing page.
@@ -20,7 +31,13 @@ class MyLogin extends StatefulWidget {
 }
 
 class _MyLoginState extends State<MyLogin> {
+  // String g_name = "";
+  String g_password = "";
+  String g_email = "";
+  TextEditingController _email = new TextEditingController();
+
   //class definition.
+  var temp;
   @override
   Widget build(BuildContext context) {
     //initializes the page to be built.
@@ -56,6 +73,7 @@ class _MyLoginState extends State<MyLogin> {
                 // child widget.
                 TextField(
                   //creates textField widget
+                  controller: _email,
                   decoration: InputDecoration(
                     // the text box to be filled
                     fillColor: Colors.grey.shade100, //  color is set to white.
@@ -69,6 +87,10 @@ class _MyLoginState extends State<MyLogin> {
                           10), // size of the border set to 10.
                     ),
                   ),
+
+                  onChanged: (name) {
+                    g_email = name;
+                  },
                 ),
 
                 const SizedBox(
@@ -92,6 +114,9 @@ class _MyLoginState extends State<MyLogin> {
                           10), //borders the text box with size 10.
                     ),
                   ),
+                  onChanged: (name) {
+                    g_password = name;
+                  },
                 ),
 
                 const SizedBox(
@@ -124,9 +149,50 @@ class _MyLoginState extends State<MyLogin> {
                           .lightBlueAccent, // set the color for the button.
                       child: IconButton(
                         //the icon inside the button
-                        color: Colors.white, // icon color set to white.
-                        onPressed: () {
-                          Navigator.pushNamed(context, 'checkin_page');
+                        color: Colors.white, // icon color set to white
+                        onPressed: () async {
+                          var db = await mongo.Db.create(
+                              MONGO_URL_Signup); //wait to locate url
+                          await db
+                              .open(); //opens the connection to url - reuquired db
+                          inspect(db); //ensures url exists
+                          var status =
+                              db.serverStatus(); //provides the status of url
+                          // print(status);//debug print to ensure sucessful status
+                          var collection = db.collection(
+                              COLLECTION_NAME_signup); //determine the collection of the entry
+                          temp = await collection
+                              .find(mongo.where
+                                  .eq('password', g_password)
+                                  .eq('email', g_email))
+                              .toList(); //look for specific entry
+                          // print(temp[0]); //debug
+                          bool temp1 =
+                              temp.isEmpty; //check for list being empty
+                          await db.close(); //close d
+                          print(temp1); //debug
+                          if (!temp1) {
+                            //check for true condition
+                            Navigator.of(context).push(MaterialPageRoute(
+                                // if entry exists go to next page
+                                builder: (context) => MyCheckIn(
+                                      email: _email.text,
+                                    )));
+                            // Navigator.pushNamed(context, 'checkin_page')y;
+                          } else {
+                            showDialog(
+                                // dialog for if condition fails
+                                context: context,
+                                builder: (context) => AlertDialog(
+                                      // pop up dialog
+                                      title: Text("ERROR"), // title of dialog
+                                      content: Text(// text under dialog
+                                          "Username/Password entered is incorrect"),
+                                    ));
+                            setState(() {}); // reset the page
+                          }
+
+                          // setState(() {});
                         }, // allows user to click the button. Nothing happens right now.
                         icon: const Icon(Icons
                             .arrow_forward), // icon inside the button is an arrow.
@@ -169,8 +235,9 @@ class _MyLoginState extends State<MyLogin> {
 
                       TextButton(
                         //text button widget
-                        onPressed:
-                            () {}, // allows user to press button. Nothing is implemented yet.
+                        onPressed: () {
+                          Navigator.pushNamed(context, 'forgotPass_page');
+                        }, // allows user to press button. Nothing is implemented yet.
                         child: const Text(
                           //text button.
                           'Forgot Password', //string 'Forgot Password'

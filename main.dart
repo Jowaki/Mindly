@@ -12,10 +12,15 @@
 * KNOWN FAULT - None
 */
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/forgotPass_page.dart';
+import 'package:flutter_application_1/graph_page.dart';
+import 'package:flutter_application_1/reminder_page.dart';
 import 'package:flutter_application_1/personal_page.dart';
 import 'package:flutter_application_1/play.dart';
 import 'package:flutter_application_1/profile.dart';
+import 'package:flutter_application_1/profileMenu_page.dart';
 import 'package:flutter_application_1/resourcepage.dart';
+import 'package:flutter_application_1/test_page.dart';
 import 'button_game.dart';
 import 'login_page.dart';
 import 'sign_up_page.dart';
@@ -24,6 +29,10 @@ import 'DemoApp.dart';
 import 'check_in.dart';
 import 'music_page.dart';
 import 'play.dart';
+import 'reminder_page.dart';
+import 'graph_page.dart';
+import 'profileMenu_page.dart';
+// import 'profileMenu_page.dart';
 // import 'mongodb.dart';
 
 Future<void> main() async {
@@ -53,14 +62,27 @@ class MyApp extends StatelessWidget {
               const MyRegister(), // sign up page available to traverse
           'journal_page': (context) =>
               const MyJournal(), // Journal page available to traverse.
-          'home_page': (context) => DemoApp(),
+          'home_page': (context) => DemoApp(
+                email: '',
+              ),
           'game_page': (context) => const buttonApp(),
-          'checkin_page': (context) => const MyCheckIn(),
+          'checkin_page': (context) => MyCheckIn(
+                email: '',
+              ), //TODO
           "resource_page": (context) => const MyResource(),
           "personal_page": (context) => const MyPersonal(),
-          "profile_page": (context) => const Profile_pg(),
+          "profile_page": (context) => Profile_pg(
+                email: '',
+              ),
           "music_page": (context) => const MyMusic(),
           "play_page": (context) => const MyPlay(),
+          "test_page": (context) => const MyTest(),
+          "forgotPass_page": (context) => const MyForgotPass(),
+          "reminder_page": (context) => const MyNoteScreen(),
+          "graph_page": (context) => const MyGraph(),
+          "profileMenu_page": (context) => SettingsPageUI(
+                email: '',
+              ),
         });
   }
 }

@@ -14,6 +14,8 @@
 
 import 'dart:developer';
 import 'package:flutter_application_1/constant.dart';
+import 'package:crypto/crypto.dart';
+import 'dart:convert'; // for the utf8.encode method
 
 import 'package:flutter/material.dart';
 // ignore: unnecessary_import
@@ -35,15 +37,13 @@ class _MyRegisterState extends State<MyRegister> {
   String g_password = "";
   String g_email = "";
 
-  // get password => null;
-
-  // get email => null;
   //class is defined here.
   @override
   // final myController = TextEditingController();////creates a text extrating var
 
   Widget build(BuildContext context) {
     //initializes the page build.
+
     return Container(
       // container widget. What the program is going to contain.
       child: Scaffold(
@@ -222,29 +222,34 @@ class _MyRegisterState extends State<MyRegister> {
                           color: Colors
                               .white, //the color of icon inside the button. currently set to white.
                           onPressed: () async {
-                            var db = await mongo.Db.create(MONGO_URL_Signup); //wait to locate url
-                            await db.open(); //opens the connection to url - reuquired db
+                            var db = await mongo.Db.create(
+                                MONGO_URL_Signup); //wait to locate url
+                            await db
+                                .open(); //opens the connection to url - reuquired db
                             inspect(db); //ensures url exists
-                            var status =db.serverStatus(); //provides the status of url
+                            var status =
+                                db.serverStatus(); //provides the status of url
 
                             // ignore: avoid_print
                             print(
                                 status); //debug print to ensure sucessful status
                             var collection = db.collection(
                                 COLLECTION_NAME_signup); //accesses collection name
-                                ///
-                                
+
+                            var salt = "mindlys";
+                            var data =
+                                utf8.encode(g_password); // data being hashed
+                            var hashvalue = sha1.convert(data);
+
                             await collection.insert({
                               "name": g_name,
-                              "password": g_password,
+                              "password": salt + hashvalue.toString(),
                               "email": g_email
-                            }
-                            );
-                            
+                            });
+
                             // final arrData = await collection.find().toList();
                             // return arrData;
 
-                            
                             Navigator.pushNamed(context, 'login_page');
                           },
                           // what actions are taken the button is pressed.

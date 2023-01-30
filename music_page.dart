@@ -20,16 +20,76 @@ class MyMusic extends StatefulWidget {
 
 class _MyMusicState extends State<MyMusic> {
   Widget build(BuildContext context) {
+    String appTitle = "Mindly Music Page";
     return Container(
       // container widget. What the page is going to contain.
+
       child: Scaffold(
+        bottomNavigationBar: BottomAppBar(
+            color: Colors.blue,
+            child: Row(
+              children: <Widget>[
+                IconButton(
+                  // button
+                  // mainAxisAlignment: MainAxisAlignment.center,
+                  icon: Image.asset('assets/game.png'), //image
+                  iconSize: 50, //size
+                  onPressed: () {
+                    //functionality
+                    Navigator.pushNamed(context, 'game_page');
+                  },
+                ),
+                IconButton(
+                  // button
+                  // mainAxisAlignment: MainAxisAlignment.center,
+                  icon: Image.asset('assets/journal.png'), //image
+                  iconSize: 50, //size
+                  onPressed: () {
+                    //functionality
+                    Navigator.pushNamed(context, 'journal_page');
+                  },
+                ),
+                IconButton(
+                  //button
+                  // mainAxisAlignment: MainAxisAlignment.center,
+                  icon: Image.asset('assets/home.png'), //image
+                  iconSize: 50, //size
+                  onPressed: () {
+                    //functionality
+                    Navigator.pushNamed(context, 'home_page');
+                  },
+                ),
+                IconButton(
+                  // Icon buttom
+                  // mainAxisAlignment: MainAxisAlignment.center,
+                  icon: Image.asset('assets/music.png'), //image
+                  iconSize: 50, //size
+                  onPressed: () {
+                    Navigator.pushNamed(context, 'music_page');
+                  }, //functionality
+                ),
+                IconButton(
+                  tooltip: 'Open navigation menu',
+                  icon: Image.asset('assets/info.png'), //image
+                  iconSize: 50, //size
+                  onPressed: () {
+                    //functionality
+                    Navigator.pushNamed(context, 'resource_page');
+                  },
+                ),
+              ],
+            )),
+        appBar: AppBar(
+          //app bar widget.
+          title: Text(appTitle), // title of the app bar.
+        ),
         // defining the background.
         backgroundColor:
             Colors.blue, // background color of the page. Currently set to
         body: Stack(children: [
           const Text(
             // creates a textfield
-            "Mindly\nMusic Page\n", //text
+            "\n", //text
             style: TextStyle(
               // the style for the text
               color: Colors.white, // color it white
@@ -43,9 +103,9 @@ class _MyMusicState extends State<MyMusic> {
               // child widget for the scroll views.
               padding: const EdgeInsets.only(
                 right: 35, // distance from the right
+                top: 20,
                 left: 35, // distance from the left
-                top: 200, //distance from the top
-                bottom: 80, // distance from the bottom
+                bottom: 180, // distance from the bottom
               ), //MediaQuery.of(context).size.height *
               //0.5), //allows the upcoming text to be centered.
 
@@ -87,88 +147,6 @@ class _MyMusicState extends State<MyMusic> {
               ]),
             ),
           ),
-          Positioned(
-              // position of button
-              bottom: 10, // distance from bottom
-              left: 2, // distance from top
-              child: IconButton(
-                // Icon buttom
-                // mainAxisAlignment: MainAxisAlignment.center,
-                icon: Image.asset('assets/music.png'), //image
-                iconSize: 50, //size
-                onPressed: () {
-                  Navigator.pushNamed(context, 'music_page');
-                }, //functionality
-              )),
-          Positioned(
-              // position of button
-              bottom: 10, // distance from bottom
-              left: 52, // distance from left
-              child: IconButton(
-                // button
-                // mainAxisAlignment: MainAxisAlignment.center,
-                icon: Image.asset('assets/journal.png'), //image
-                iconSize: 50, //size
-                onPressed: () {
-                  //functionality
-                  Navigator.pushNamed(context, 'journal_page');
-                },
-              )),
-          Positioned(
-              //position of button
-              bottom: 10, //distance from bottom
-              left: 102, //distance from left
-              child: IconButton(
-                // button
-                // mainAxisAlignment: MainAxisAlignment.center,
-                icon: Image.asset('assets/game.png'), //image
-                iconSize: 50, //size
-                onPressed: () {
-                  //functionality
-                  Navigator.pushNamed(context, 'game_page');
-                },
-              )),
-          Positioned(
-              //position of button
-              bottom: 10, //distance from bottom
-              left: 152, //distance from left
-              child: IconButton(
-                //button
-                // mainAxisAlignment: MainAxisAlignment.center,
-                icon: Image.asset('assets/home.png'), //image
-                iconSize: 50, //size
-                onPressed: () {
-                  //functionality
-                  Navigator.pushNamed(context, 'home_page');
-                },
-              )),
-          Positioned(
-              //position of button
-              bottom: 10, // distance from bottom
-              left: 202, //distance from left
-              child: IconButton(
-                //button
-                // mainAxisAlignment: MainAxisAlignment.center,
-                icon: Image.asset('assets/info.png'), //image
-                iconSize: 50, //size
-                onPressed: () {
-                  //functionality
-                  Navigator.pushNamed(context, 'resource_page');
-                },
-              )),
-          Positioned(
-              //position of button
-
-              bottom: 10, //positioning the button from the bottom
-              left: 252, //positioning the button from the left
-              child: IconButton(
-                // mainAxisAlignment: MainAxisAlignment.center,
-                icon: Image.asset('assets/profile.png'), //image to be used
-                iconSize: 50, //buttom size
-                onPressed: () {
-                  Navigator.pushNamed(context, 'profile_page');
-                }, //functionality on pressed
-              ))
         ]),
       ),
     );

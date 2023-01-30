@@ -74,6 +74,10 @@ class _MyPlayState extends State<MyPlay> {
 
   @override
   Widget build(BuildContext context) => Scaffold(
+      appBar: AppBar(
+        //app bar widget.
+        title: Text("Mindly"), // title of the app bar.
+      ),
       // build
       body: Padding(
           //padding for page
