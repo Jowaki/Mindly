@@ -13,6 +13,7 @@
 */
 
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/quiz_screen.dart';
 import 'dart:developer';
 // import 'package:flutter/cupertino.dart';
 // import 'package:flutter/material.dart';
@@ -172,10 +173,11 @@ class _MyLoginState extends State<MyLogin> {
                           await db.close(); //close d
                           print(temp1); //debug
                           if (!temp1) {
-                            //check for true condition
+                            //check for true
+
                             Navigator.of(context).push(MaterialPageRoute(
                                 // if entry exists go to next page
-                                builder: (context) => MyCheckIn(
+                                builder: (context) => QuizScreen(
                                       email: _email.text,
                                     )));
                             // Navigator.pushNamed(context, 'checkin_page')y;

@@ -20,16 +20,22 @@ import 'constant.dart';
 
 class Profile_pg extends StatefulWidget {
   String email;
-  Profile_pg({required this.email});
+  String password;
+  String name;
+  Profile_pg({required this.email, required this.password, required this.name});
 
   @override
-  _Profile_pgState createState() => _Profile_pgState(email: '$email');
+  _Profile_pgState createState() => _Profile_pgState(
+      email: '$email', password: '${password}', name: '${name}');
 }
 
 class _Profile_pgState extends State<Profile_pg> {
   // MaterialColor backgroundColor;
   String email;
-  _Profile_pgState({required this.email});
+  String password;
+  String name;
+  _Profile_pgState(
+      {required this.email, required this.password, required this.name});
 
   get static => null;
   var temp;
@@ -39,19 +45,16 @@ class _Profile_pgState extends State<Profile_pg> {
   // var temp;
 
   // get red => null;
-
+  // var finalemail;
+  // var password;
+  // var name;
   @override
   Widget build(BuildContext context) {
     print('object ${email}');
-
-    const appTitle =
-        'Mindly'; // this sets the title of the page. set to 'Mindly' for all pages as of 10/03.
     return MaterialApp(
+        debugShowCheckedModeBanner: false,
 
         // what the page will contain. returns the content below.
-        debugShowCheckedModeBanner:
-            false, // disables debug banner when troubleshooting.
-        title: appTitle, // title is set to 'Mindly'.
         home: Scaffold(
 
             // home page is set.
@@ -111,19 +114,20 @@ class _Profile_pgState extends State<Profile_pg> {
                 )),
             appBar: AppBar(
               //app bar widget.
+              title: Text('MINDLY'),
+
               actions: <Widget>[
                 IconButton(
                   icon: Icon(
-                    Icons.settings,
+                    Icons.edit,
                     color: Colors.white,
                   ),
                   onPressed: () {
                     // do something
-                    Navigator.pushNamed(context, 'notification_page');
+                    Navigator.pushNamed(context, 'updateInfo_page');
                   },
                 ),
               ],
-              title: const Text(appTitle), // title of the app bar.
             ),
             backgroundColor: Colors.blue, // background color of the main page
             body: Stack(children: [
@@ -138,58 +142,86 @@ class _Profile_pgState extends State<Profile_pg> {
 
                     // right: 70,
                     // bottom: 100,
-                    child: FloatingActionButton(
-                      onPressed: () async {
-                        var db = await mongo.Db.create(
-                            MONGO_URL_Signup); //wait to locate url
-                        await db
-                            .open(); //opens the connection to url - reuquired db
-                        inspect(db); //ensures url exists
-                        var status =
-                            db.serverStatus(); //provides the status of url
-                        // print(status);//debug print to ensure sucessful status
-                        var collection = db.collection(
-                            COLLECTION_NAME_signup); //determine the collection of the entry
-                        temp = await collection
-                            .find(mongo.where.eq('email', '${email}'))
-                            .toList(); //look for specific entry
-                        // print(temp[0]); //debug
-
-                        final validMap = json
-                            .decode(
-                                json.encode(temp[0])) as Map<String,
-                            dynamic>; //map the input data to a hashmap using json
-                        print(validMap); //debug
-
-                        temp = validMap;
-
-                        // temp.forEach((k,v) => print("$k := $v"));
-                        temp.forEach((k, v) => transfer.add(
-                            "$k := $v\n")); //convert each map to a string and add to list
-                        await db.close(); //close db
-                        setState(() {}); //reset the page
-
-                        // const Text("Details\n $temp");
-                        // Navigator.pushAndRemoveUntil(
-                        //               context,
-                        //               MaterialPageRoute(builder: (context) => Profile_pg()),
-                        //               (Route<dynamic> route) => false,
-                        //             );
-                      },
-                    ),
                   )),
-              Text(
-                // setState(() {});
-                "Details\n $transfer", //print person details
-                style: TextStyle(
-                  //determine text style
-                  color: Colors.white,
-                  // decoration: TextDecoration.underline,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 20,
-                ),
-                textAlign: TextAlign.left, //align text
-              ),
+              Column(
+                children: [
+                  RichText(
+                    text: TextSpan(
+                      style: TextStyle(
+                        //determine text style
+                        color: Colors.white,
+                        // decoration: TextDecoration.underline,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 30,
+                      ),
+                      children: [
+                        WidgetSpan(
+                          child: Padding(
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 2.0),
+                            child: IconButton(
+                              iconSize: 30,
+                              onPressed: () {},
+                              icon: Icon(Icons.person, color: Colors.white),
+                            ),
+                          ),
+                        ),
+                        TextSpan(text: 'Name: ${name}'),
+                      ],
+                    ),
+                  ),
+                  RichText(
+                    text: TextSpan(
+                      style: TextStyle(
+                        //determine text style
+                        color: Colors.white,
+                        // decoration: TextDecoration.underline,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 30,
+                      ),
+                      children: [
+                        WidgetSpan(
+                          child: Padding(
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 2.0),
+                            child: IconButton(
+                              iconSize: 30,
+                              onPressed: () {},
+                              icon: Icon(Icons.mail, color: Colors.white),
+                            ),
+                          ),
+                        ),
+                        TextSpan(text: 'Email: ${email}'),
+                      ],
+                    ),
+                  ),
+                  RichText(
+                    text: TextSpan(
+                      style: TextStyle(
+                        //determine text style
+                        color: Colors.white,
+                        // decoration: TextDecoration.underline,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 30,
+                      ),
+                      children: [
+                        WidgetSpan(
+                          child: Padding(
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 2.0),
+                            child: IconButton(
+                              iconSize: 30,
+                              onPressed: () {},
+                              icon: Icon(Icons.key, color: Colors.white),
+                            ),
+                          ),
+                        ),
+                        TextSpan(text: 'Password: ${password}'),
+                      ],
+                    ),
+                  ),
+                ],
+              )
             ])));
   }
 }

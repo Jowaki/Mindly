@@ -77,7 +77,7 @@ class _DemoAppState extends State<DemoApp> {
                   iconSize: 50, //size
                   onPressed: () {
                     //functionality
-                    Navigator.pushNamed(context, 'game_page');
+                    Navigator.pushNamed(context, 'tap_game');
                   },
                 ),
                 IconButton(

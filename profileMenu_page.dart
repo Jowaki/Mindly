@@ -10,6 +10,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/profile.dart';
 
+import 'dart:collection';
+import 'dart:convert';
+import 'dart:developer';
+
+import 'package:mongo_dart/mongo_dart.dart' as mongo;
+// import 'package:mongo_dart/mongo_dart.dart';
+import 'constant.dart';
+
 class SettingsPageUI extends StatefulWidget {
   // stateful widget
   String email; // member var
@@ -80,14 +88,64 @@ class _SettingsPageUIState extends State<SettingsPageUI> {
   }
 
   GestureDetector PersonalDetails(BuildContext context, String title) {
+    var temp;
+    late final validMap;
+    late final List transfer = []; //create a list
+    // ignore: prefer_typing_uninitialized_variables
+    // var temp;
+
+    // get red => null;
+    var finalemail;
+    var password;
+    var name;
+
     // for personal details
     return GestureDetector(
         // check movement
-        onTap: () {
+        onTap: () async {
+          var db = await mongo.Db.create(MONGO_URL_Signup); //wait to locate url
+          await db.open(); //opens the connection to url - reuquired db
+          inspect(db); //ensures url exists
+          var status = db.serverStatus(); //provides the status of url
+          // print(status);//debug print to ensure sucessful status
+          var collection = db.collection(
+              COLLECTION_NAME_signup); //determine the collection of the entry
+          temp = await collection
+              .find(mongo.where.eq('email', '${email}'))
+              .toList(); //look for specific entry
+          print(temp[0]); //debug
+          // print(temp["email"]); //debug
+
+          print('check'); //debug
+
+          final validMap = json.decode(json.encode(temp[0])) as Map<String,
+              dynamic>; //map the input data to a hashmap using json
+          print(validMap); //debug
+
+          temp = validMap;
+
+          temp.forEach((k, v) {
+            finalemail = (temp['email']);
+            password = (temp['password']);
+            name = (temp['name']);
+            // print("TestTEst");
+          });
+
+          // Text("Your details are\n");
+
+          // String name = temp.forEach((k, v) => print("$k := $v"));
+
+          temp.forEach((k, v) => transfer.add(
+              "$k := $v\n")); //convert each map to a string and add to list
+          await db.close(); //close db
+          setState(() {}); //reset the page
+
           Navigator.of(context).push(MaterialPageRoute(
               // if tapped, go to this page
               builder: (context) => Profile_pg(
-                    email: ('${email}'),
+                    email: ('${finalemail}'),
+                    password: ('${password}'),
+                    name: ('${name}'),
                   )));
         },
         child: Padding(

@@ -13,7 +13,9 @@
 */
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/forgotPass_page.dart';
+import 'package:flutter_application_1/games_page.dart';
 import 'package:flutter_application_1/graph_page.dart';
+import 'package:flutter_application_1/quiz_screen.dart';
 import 'package:flutter_application_1/reminder_page.dart';
 import 'package:flutter_application_1/personal_page.dart';
 import 'package:flutter_application_1/play.dart';
@@ -21,7 +23,6 @@ import 'package:flutter_application_1/profile.dart';
 import 'package:flutter_application_1/profileMenu_page.dart';
 import 'package:flutter_application_1/resourcepage.dart';
 import 'package:flutter_application_1/test_page.dart';
-import 'button_game.dart';
 import 'login_page.dart';
 import 'sign_up_page.dart';
 import 'journal_page.dart';
@@ -32,6 +33,9 @@ import 'play.dart';
 import 'reminder_page.dart';
 import 'graph_page.dart';
 import 'profileMenu_page.dart';
+import 'games_page.dart';
+import 'quiz_screen.dart';
+import 'question_model.dart';
 // import 'profileMenu_page.dart';
 // import 'mongodb.dart';
 
@@ -65,7 +69,6 @@ class MyApp extends StatelessWidget {
           'home_page': (context) => DemoApp(
                 email: '',
               ),
-          'game_page': (context) => const buttonApp(),
           'checkin_page': (context) => MyCheckIn(
                 email: '',
               ), //TODO
@@ -73,6 +76,8 @@ class MyApp extends StatelessWidget {
           "personal_page": (context) => const MyPersonal(),
           "profile_page": (context) => Profile_pg(
                 email: '',
+                name: '',
+                password: '',
               ),
           "music_page": (context) => const MyMusic(),
           "play_page": (context) => const MyPlay(),
@@ -80,6 +85,11 @@ class MyApp extends StatelessWidget {
           "forgotPass_page": (context) => const MyForgotPass(),
           "reminder_page": (context) => const MyNoteScreen(),
           "graph_page": (context) => const MyGraph(),
+          "tap_game": (context) => const MyGamePage(),
+          "quiz_page": (context) => QuizScreen(
+                email: '',
+              ),
+
           "profileMenu_page": (context) => SettingsPageUI(
                 email: '',
               ),
