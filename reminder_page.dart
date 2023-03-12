@@ -26,17 +26,17 @@ class _MyNoteScreenState extends State<MyNoteScreen> {
       appBar: AppBar(
         // title of the page
         title: Text("Mindly Set Reminders"),
-        actions: <Widget>[
-          IconButton(
-            icon: const Icon(
-                Icons.arrow_back), // functionality for the back button
-            onPressed: () {
-              // do something
-              Navigator.pushNamed(context,
-                  'profileMenu_page'); // navigate to menu page once button clicked
-            },
-          ),
-        ],
+        // actions: <Widget>[
+        //   IconButton(
+        //     icon: const Icon(
+        //         Icons.arrow_back), // functionality for the back button
+        //     onPressed: () {
+        //       // do something
+        //       Navigator.pushNamed(context,
+        //           'profileMenu_page'); // navigate to menu page once button clicked
+        //     },
+        //   ),
+        // ],
       ),
       body: SingleChildScrollView(
         // scrolling the page

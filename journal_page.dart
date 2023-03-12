@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/DemoApp.dart';
 
 /*This is the journaling page the user fills to record their entries.
 # NAME OF CODE ARTIFACT - Journal_page.dart 
@@ -12,28 +13,38 @@ import 'package:flutter/material.dart';
 #                                   - increased the size of the text box.
 #                 November 4th 
 #                   Jowaki Merani - conected the save button to send teh text to the db 
-#
+#                 March 9th
+                   Parveen Kaur - added proper navigation between pages
 # 
 */
 import 'dart:developer';
 import 'package:flutter_application_1/constant.dart';
+import 'package:flutter_application_1/resourcepage.dart';
 import 'package:flutter_clean_calendar/clean_calendar_event.dart';
 import 'package:mongo_dart/mongo_dart.dart' as mongo;
+
+import 'animal.dart';
+import 'games_meanu_pg.dart';
+import 'music_page.dart';
 // import 'package:mongo_dart/mongo_dart.dart';
 
 class MyJournal extends StatefulWidget {
   // class for the journal page.
-
-  const MyJournal({Key? key})
-      : super(key: key); //constructor for the journal page.
+  String email;
+  MyJournal({required this.email}); //constructor for the journal page.
 
   @override
-  _MyJournalState createState() => _MyJournalState(); //creates journal page.
+  _MyJournalState createState() =>
+      _MyJournalState(email: '$email'); //creates journal page.
 }
 
 class _MyJournalState extends State<MyJournal> {
   //defines the journal page.
   String g_journal = "";
+  String email = "";
+
+  _MyJournalState({required this.email});
+
   @override
   Widget build(BuildContext context) {
     // builds the widget.
@@ -47,6 +58,7 @@ class _MyJournalState extends State<MyJournal> {
       home: Scaffold(
         // home page is set
         // .
+        // bottom bar icons for navigation through pages
         bottomNavigationBar: BottomAppBar(
             color: Colors.blue,
             child: Row(
@@ -58,7 +70,10 @@ class _MyJournalState extends State<MyJournal> {
                   iconSize: 50, //size
                   onPressed: () {
                     //functionality
-                    Navigator.pushNamed(context, 'game_page');
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => MyGame_Meanu(
+                              email: ('${email}'),
+                            )));
                   },
                 ),
                 IconButton(
@@ -68,7 +83,10 @@ class _MyJournalState extends State<MyJournal> {
                   iconSize: 50, //size
                   onPressed: () {
                     //functionality
-                    Navigator.pushNamed(context, 'journal_page');
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => MyJournal(
+                              email: ('${email}'),
+                            )));
                   },
                 ),
                 IconButton(
@@ -77,8 +95,13 @@ class _MyJournalState extends State<MyJournal> {
                   icon: Image.asset('assets/home.png'), //image
                   iconSize: 50, //size
                   onPressed: () {
+                    // if tapped, go to this page
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => DemoApp(
+                              email: ('$email'),
+                            )));
                     //functionality
-                    Navigator.pushNamed(context, 'home_page');
+                    // Navigator.pushNamed(context, 'home_page');
                   },
                 ),
                 IconButton(
@@ -87,7 +110,11 @@ class _MyJournalState extends State<MyJournal> {
                   icon: Image.asset('assets/music.png'), //image
                   iconSize: 50, //size
                   onPressed: () {
-                    Navigator.pushNamed(context, 'music_page');
+                    Navigator.of(context).push(MaterialPageRoute(
+                        // if tapped, go to this page
+                        builder: (context) => MyMusic(
+                              email: ('$email'),
+                            )));
                   }, //functionality
                 ),
                 IconButton(
@@ -95,9 +122,26 @@ class _MyJournalState extends State<MyJournal> {
                   icon: Image.asset('assets/info.png'), //image
                   iconSize: 50, //size
                   onPressed: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                        // if tapped, go to this page
+                        builder: (context) => MyResource(
+                              email: ('$email'),
+                            )));
                     //functionality
-                    Navigator.pushNamed(context, 'resource_page');
                   },
+                ),
+                IconButton(
+                  // Icon buttom
+                  // mainAxisAlignment: MainAxisAlignment.center,
+                  icon: Image.asset('assets/animal.png'), //image
+                  iconSize: 50, //size
+                  onPressed: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                        // if tapped, go to this page
+                        builder: (context) => MyAnimal(
+                              email: ('$email'),
+                            )));
+                  }, //functionality
                 ),
               ],
             )),

@@ -1,3 +1,12 @@
+/*
+* NAME OF CODE ARTIFACT - question_model.dart
+* BRIEF DESCRIPTION - Questions for the checkin page 
+* PROGRAMMERS NAME - Parveen Kaur
+* DATE CODE CREATED - February 20th 2022
+* DATE REVISED - 
+* KNOWN FAULT - None
+*/
+
 class Question {
   // question class
   final String questionText; // question string

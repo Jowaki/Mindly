@@ -4,24 +4,36 @@
 *                     - It displays the resources available
 * PROGRAMMERS NAME - Parveen Kaur 
 * DATE CODE CREATED - November 14th 2022
-* DATE REVISED - November 14th 2022
+* DATE REVISED - March 9th 2023
+                Parveen Kaur - fix navigation between pages
 * KNOWN FAULT - None
 */
 
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/DemoApp.dart';
+import 'package:flutter_application_1/personal_page.dart';
+
+import 'animal.dart';
+import 'games_meanu_pg.dart';
+import 'journal_page.dart';
+import 'music_page.dart';
 
 class MyResource extends StatefulWidget {
   //class for the login landing page.
-  const MyResource({Key? key})
-      : super(key: key); // constructor for log in page.
+  String email;
+  MyResource({required this.email});
+  // const MyResource({Key? key})
+  //     : super(key: key); // constructor for log in page.
 
   @override
-  _MyResourceState createState() => _MyResourceState(); //creates login page.
+  _MyResourceState createState() =>
+      _MyResourceState(email: '${email}'); //creates login page.
 }
 
 class _MyResourceState extends State<MyResource> {
   String appTitle = "Mindly";
-
+  String email;
+  _MyResourceState({required this.email});
   //class definition.
   @override
   Widget build(BuildContext context) {
@@ -30,6 +42,7 @@ class _MyResourceState extends State<MyResource> {
     return Container(
       // container widget. What the page is going to contain.
       child: Scaffold(
+        //bottombar deals with navigating between pages
         bottomNavigationBar: BottomAppBar(
             color: Colors.blue,
             child: Row(
@@ -41,7 +54,10 @@ class _MyResourceState extends State<MyResource> {
                   iconSize: 50, //size
                   onPressed: () {
                     //functionality
-                    Navigator.pushNamed(context, 'game_page');
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => MyGame_Meanu(
+                              email: ('${email}'),
+                            )));
                   },
                 ),
                 IconButton(
@@ -51,7 +67,10 @@ class _MyResourceState extends State<MyResource> {
                   iconSize: 50, //size
                   onPressed: () {
                     //functionality
-                    Navigator.pushNamed(context, 'journal_page');
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => MyJournal(
+                              email: ('${email}'),
+                            )));
                   },
                 ),
                 IconButton(
@@ -60,8 +79,13 @@ class _MyResourceState extends State<MyResource> {
                   icon: Image.asset('assets/home.png'), //image
                   iconSize: 50, //size
                   onPressed: () {
+                    // if tapped, go to this page
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => DemoApp(
+                              email: ('$email'),
+                            )));
                     //functionality
-                    Navigator.pushNamed(context, 'home_page');
+                    // Navigator.pushNamed(context, 'home_page');
                   },
                 ),
                 IconButton(
@@ -70,7 +94,11 @@ class _MyResourceState extends State<MyResource> {
                   icon: Image.asset('assets/music.png'), //image
                   iconSize: 50, //size
                   onPressed: () {
-                    Navigator.pushNamed(context, 'music_page');
+                    Navigator.of(context).push(MaterialPageRoute(
+                        // if tapped, go to this page
+                        builder: (context) => MyMusic(
+                              email: ('$email'),
+                            )));
                   }, //functionality
                 ),
                 IconButton(
@@ -78,9 +106,26 @@ class _MyResourceState extends State<MyResource> {
                   icon: Image.asset('assets/info.png'), //image
                   iconSize: 50, //size
                   onPressed: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                        // if tapped, go to this page
+                        builder: (context) => MyResource(
+                              email: ('$email'),
+                            )));
                     //functionality
-                    Navigator.pushNamed(context, 'resource_page');
                   },
+                ),
+                IconButton(
+                  // Icon buttom
+                  // mainAxisAlignment: MainAxisAlignment.center,
+                  icon: Image.asset('assets/animal.png'), //image
+                  iconSize: 50, //size
+                  onPressed: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                        // if tapped, go to this page
+                        builder: (context) => MyAnimal(
+                              email: ('$email'),
+                            )));
+                  }, //functionality
                 ),
               ],
             )),
@@ -92,7 +137,11 @@ class _MyResourceState extends State<MyResource> {
               icon: Image.asset('assets/pointy.png'), //image
               onPressed: () {
                 // do something
-                Navigator.pushNamed(context, 'personal_page');
+                Navigator.of(context).push(MaterialPageRoute(
+                    // if tapped, go to this page
+                    builder: (context) => MyPersonal(
+                          email: ('$email'),
+                        )));
               },
             ),
           ],

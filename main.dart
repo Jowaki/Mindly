@@ -13,8 +13,9 @@
 */
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/forgotPass_page.dart';
-import 'package:flutter_application_1/games_page.dart';
+import 'package:flutter_application_1/tapping_game.dart';
 import 'package:flutter_application_1/graph_page.dart';
+import 'package:flutter_application_1/paint_pad.dart';
 import 'package:flutter_application_1/quiz_screen.dart';
 import 'package:flutter_application_1/reminder_page.dart';
 import 'package:flutter_application_1/personal_page.dart';
@@ -22,20 +23,24 @@ import 'package:flutter_application_1/play.dart';
 import 'package:flutter_application_1/profile.dart';
 import 'package:flutter_application_1/profileMenu_page.dart';
 import 'package:flutter_application_1/resourcepage.dart';
-import 'package:flutter_application_1/test_page.dart';
+import 'package:flutter_application_1/word_game.dart';
+import 'editProfile_page.dart';
 import 'login_page.dart';
 import 'sign_up_page.dart';
 import 'journal_page.dart';
 import 'DemoApp.dart';
-import 'check_in.dart';
 import 'music_page.dart';
+import 'word_game.dart';
 import 'play.dart';
 import 'reminder_page.dart';
 import 'graph_page.dart';
 import 'profileMenu_page.dart';
-import 'games_page.dart';
+import 'tapping_game.dart';
 import 'quiz_screen.dart';
 import 'question_model.dart';
+import 'animal.dart';
+import 'paint_pad.dart';
+import 'games_meanu_pg.dart';
 // import 'profileMenu_page.dart';
 // import 'mongodb.dart';
 
@@ -64,28 +69,40 @@ class MyApp extends StatelessWidget {
               const MyLogin(), // login page available to traverse to
           'sign_up_page': (context) =>
               const MyRegister(), // sign up page available to traverse
-          'journal_page': (context) =>
-              const MyJournal(), // Journal page available to traverse.
+          'journal_page': (context) => MyJournal(
+                email: '',
+              ), // Journal page available to traverse.
           'home_page': (context) => DemoApp(
                 email: '',
               ),
-          'checkin_page': (context) => MyCheckIn(
+
+          "resource_page": (context) => MyResource(
                 email: '',
-              ), //TODO
-          "resource_page": (context) => const MyResource(),
-          "personal_page": (context) => const MyPersonal(),
+              ),
+          "personal_page": (context) => MyPersonal(
+                email: '',
+              ),
           "profile_page": (context) => Profile_pg(
                 email: '',
                 name: '',
                 password: '',
               ),
-          "music_page": (context) => const MyMusic(),
+          "music_page": (context) => MyMusic(
+                email: '',
+              ),
+          "game_menu": (context) => MyGame_Meanu(
+                email: '',
+              ),
+          "ping_pong": (context) => MyPaint(),
+          "animal_page": (context) => MyAnimal(
+                email: '',
+              ),
           "play_page": (context) => const MyPlay(),
-          "test_page": (context) => const MyTest(),
           "forgotPass_page": (context) => const MyForgotPass(),
           "reminder_page": (context) => const MyNoteScreen(),
           "graph_page": (context) => const MyGraph(),
           "tap_game": (context) => const MyGamePage(),
+          "word_game": (context) => const MyApp1(),
           "quiz_page": (context) => QuizScreen(
                 email: '',
               ),
@@ -93,6 +110,12 @@ class MyApp extends StatelessWidget {
           "profileMenu_page": (context) => SettingsPageUI(
                 email: '',
               ),
+          "editProfile_page": (context) => EditProfileUI(
+                email: '',
+                name: '',
+                password: '',
+              ),
+          // "word_game": (context) => const WordGame(),
         });
   }
 }

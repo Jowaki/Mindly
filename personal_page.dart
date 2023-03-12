@@ -4,7 +4,8 @@
 *                     - It displays the resources available
 * PROGRAMMERS NAME - Parveen Kaur 
 * DATE CODE CREATED - November 14th 2022
-* DATE REVISED - November 14th 2022
+* DATE REVISED - March 9th
+                 Parveen Kaur - added proper navigation between pages
 * KNOWN FAULT - None
 */
 
@@ -12,21 +13,25 @@ import 'package:flutter/material.dart';
 
 class MyPersonal extends StatefulWidget {
   //class for the login landing page.
-  const MyPersonal({Key? key})
-      : super(key: key); // constructor for log in page.
+  String email = "";
+  MyPersonal({required this.email}); // constructor for log in page.
 
   @override
-  _MyPersonalState createState() => _MyPersonalState(); //creates login page.
+  _MyPersonalState createState() =>
+      _MyPersonalState(email: '$email'); //creates login page.
 }
 
 class _MyPersonalState extends State<MyPersonal> {
   //class definition.
+  String email;
+  _MyPersonalState({required this.email});
   @override
   Widget build(BuildContext context) {
     //initializes the page to be built.
     return Container(
       // container widget. What the page is going to contain.
       child: Scaffold(
+        //bottom bar to navigate thtrough the pages
         bottomNavigationBar: BottomAppBar(
             color: Colors.blue,
             child: Row(

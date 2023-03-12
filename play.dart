@@ -158,19 +158,6 @@ class _MyPlayState extends State<MyPlay> {
                   },
                 ),
               ),
-              Positioned(
-                  // position of button
-                  bottom: 10, // distance from bottom
-                  left: 2, // distance from top
-                  child: IconButton(
-                    // Icon buttom
-                    // mainAxisAlignment: MainAxisAlignment.center,
-                    icon: Image.asset('assets/arrow.png'), //image
-                    iconSize: 50, //size
-                    onPressed: () {
-                      Navigator.pushNamed(context, 'music_page');
-                    }, //functionality
-                  )),
             ],
           )));
 }

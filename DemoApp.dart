@@ -11,6 +11,8 @@
                  Jowaki Merani - able to redirect to journal page and store journal 
                  January 28th
                  Parveen Kaur - added constructors that take parameters.
+                 March 9th
+                 Parveen Kaur - added proper navigation between pages
 * KNOWN FAULT - None
 */
 
@@ -19,11 +21,17 @@ import 'dart:developer';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter_application_1/animal.dart';
 import 'package:flutter_application_1/constant.dart';
 import 'package:flutter_application_1/journal_page.dart';
 import 'package:flutter_application_1/profileMenu_page.dart';
+import 'package:flutter_application_1/resourcepage.dart';
 import 'package:flutter_clean_calendar/flutter_clean_calendar.dart';
 import 'package:mongo_dart/mongo_dart.dart' as mongo;
+
+import 'games_meanu_pg.dart';
+import 'music_page.dart';
+// import 'package:rive/rive.dart';
 
 // ignore: use_key_in_widget_constructors
 class DemoApp extends StatefulWidget {
@@ -77,7 +85,10 @@ class _DemoAppState extends State<DemoApp> {
                   iconSize: 50, //size
                   onPressed: () {
                     //functionality
-                    Navigator.pushNamed(context, 'tap_game');
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => MyGame_Meanu(
+                              email: ('${email}'),
+                            )));
                   },
                 ),
                 IconButton(
@@ -87,7 +98,10 @@ class _DemoAppState extends State<DemoApp> {
                   iconSize: 50, //size
                   onPressed: () {
                     //functionality
-                    Navigator.pushNamed(context, 'journal_page');
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => MyJournal(
+                              email: ('${email}'),
+                            )));
                   },
                 ),
                 IconButton(
@@ -96,8 +110,13 @@ class _DemoAppState extends State<DemoApp> {
                   icon: Image.asset('assets/home.png'), //image
                   iconSize: 50, //size
                   onPressed: () {
+                    // if tapped, go to this page
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => DemoApp(
+                              email: ('$email'),
+                            )));
                     //functionality
-                    Navigator.pushNamed(context, 'home_page');
+                    // Navigator.pushNamed(context, 'home_page');
                   },
                 ),
                 IconButton(
@@ -106,7 +125,11 @@ class _DemoAppState extends State<DemoApp> {
                   icon: Image.asset('assets/music.png'), //image
                   iconSize: 50, //size
                   onPressed: () {
-                    Navigator.pushNamed(context, 'music_page');
+                    Navigator.of(context).push(MaterialPageRoute(
+                        // if tapped, go to this page
+                        builder: (context) => MyMusic(
+                              email: ('$email'),
+                            )));
                   }, //functionality
                 ),
                 IconButton(
@@ -114,9 +137,26 @@ class _DemoAppState extends State<DemoApp> {
                   icon: Image.asset('assets/info.png'), //image
                   iconSize: 50, //size
                   onPressed: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                        // if tapped, go to this page
+                        builder: (context) => MyResource(
+                              email: ('$email'),
+                            )));
                     //functionality
-                    Navigator.pushNamed(context, 'resource_page');
                   },
+                ),
+                IconButton(
+                  // Icon buttom
+                  // mainAxisAlignment: MainAxisAlignment.center,
+                  icon: Image.asset('assets/animal.png'), //image
+                  iconSize: 50, //size
+                  onPressed: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                        // if tapped, go to this page
+                        builder: (context) => MyAnimal(
+                              email: ('$email'),
+                            )));
+                  }, //functionality
                 ),
               ],
             )),
@@ -149,7 +189,7 @@ class _DemoAppState extends State<DemoApp> {
             //creating a stack of the children
             SizedBox(
               //sizebox for teh calander
-              height: 10000, //height of the calander widget
+              height: 500, //height of the calander widget
               width: 500, //width of the calander widget
               child: Container(
                 //contaner of the calander widget
@@ -173,8 +213,9 @@ class _DemoAppState extends State<DemoApp> {
                         //ass event to date
                         context,
                         MaterialPageRoute(
-                          builder: (context) =>
-                              MyJournal(), //redirect to journal pg
+                          builder: (context) => MyJournal(
+                            email: '${email}',
+                          ), //redirect to journal pg
                         ));
                     // Navigator.pushNamed(context, 'journal_page');
 

@@ -1,3 +1,12 @@
+/*
+* NAME OF CODE ARTIFACT - quiz_screen.dart
+* BRIEF DESCRIPTION - Deals with the check-in page. Displaying questions and receiving answers
+* PROGRAMMERS NAME - Parveen Kaur
+* DATE CODE CREATED - February 20th 2022
+* DATE REVISED - 
+* KNOWN FAULT - None
+*/
+
 import 'package:flutter/material.dart';
 import 'DemoApp.dart';
 import 'question_model.dart';

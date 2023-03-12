@@ -3,28 +3,40 @@
 * BRIEF DESCRIPTION - - This creates the frontend of the music page
 * PROGRAMMERS NAME - Parveen Kaur 
 * DATE CODE CREATED - November 30th 2022
-* DATE REVISED - November 30th 2022
+* DATE REVISED - March 9th
+                 Parveen Kaur - added proper navigation between pages
 * KNOWN FAULT - None
 */
 
 import 'package:flutter/material.dart';
 import 'package:audioplayers/audioplayers.dart';
+import 'package:flutter_application_1/resourcepage.dart';
+
+import 'DemoApp.dart';
+import 'animal.dart';
+import 'games_meanu_pg.dart';
+import 'journal_page.dart';
 
 class MyMusic extends StatefulWidget {
   //class for the login landing page.
-  const MyMusic({Key? key}) : super(key: key); // constructor for log in page.
+  String email = "";
+  MyMusic({required this.email}); // constructor for log in page.
 
   @override
-  _MyMusicState createState() => _MyMusicState(); //creates login page.
+  _MyMusicState createState() =>
+      _MyMusicState(email: "$email"); //creates login page.
 }
 
 class _MyMusicState extends State<MyMusic> {
+  String email;
+  _MyMusicState({required this.email});
   Widget build(BuildContext context) {
     String appTitle = "Mindly Music Page";
     return Container(
       // container widget. What the page is going to contain.
 
       child: Scaffold(
+        //bottombar for navigation of pages
         bottomNavigationBar: BottomAppBar(
             color: Colors.blue,
             child: Row(
@@ -36,7 +48,10 @@ class _MyMusicState extends State<MyMusic> {
                   iconSize: 50, //size
                   onPressed: () {
                     //functionality
-                    Navigator.pushNamed(context, 'game_page');
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => MyGame_Meanu(
+                              email: ('${email}'),
+                            )));
                   },
                 ),
                 IconButton(
@@ -46,7 +61,10 @@ class _MyMusicState extends State<MyMusic> {
                   iconSize: 50, //size
                   onPressed: () {
                     //functionality
-                    Navigator.pushNamed(context, 'journal_page');
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => MyJournal(
+                              email: ('${email}'),
+                            )));
                   },
                 ),
                 IconButton(
@@ -55,8 +73,13 @@ class _MyMusicState extends State<MyMusic> {
                   icon: Image.asset('assets/home.png'), //image
                   iconSize: 50, //size
                   onPressed: () {
+                    // if tapped, go to this page
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => DemoApp(
+                              email: ('$email'),
+                            )));
                     //functionality
-                    Navigator.pushNamed(context, 'home_page');
+                    // Navigator.pushNamed(context, 'home_page');
                   },
                 ),
                 IconButton(
@@ -65,7 +88,11 @@ class _MyMusicState extends State<MyMusic> {
                   icon: Image.asset('assets/music.png'), //image
                   iconSize: 50, //size
                   onPressed: () {
-                    Navigator.pushNamed(context, 'music_page');
+                    Navigator.of(context).push(MaterialPageRoute(
+                        // if tapped, go to this page
+                        builder: (context) => MyMusic(
+                              email: ('$email'),
+                            )));
                   }, //functionality
                 ),
                 IconButton(
@@ -73,9 +100,26 @@ class _MyMusicState extends State<MyMusic> {
                   icon: Image.asset('assets/info.png'), //image
                   iconSize: 50, //size
                   onPressed: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                        // if tapped, go to this page
+                        builder: (context) => MyResource(
+                              email: ('$email'),
+                            )));
                     //functionality
-                    Navigator.pushNamed(context, 'resource_page');
                   },
+                ),
+                IconButton(
+                  // Icon buttom
+                  // mainAxisAlignment: MainAxisAlignment.center,
+                  icon: Image.asset('assets/animal.png'), //image
+                  iconSize: 50, //size
+                  onPressed: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                        // if tapped, go to this page
+                        builder: (context) => MyAnimal(
+                              email: ('$email'),
+                            )));
+                  }, //functionality
                 ),
               ],
             )),

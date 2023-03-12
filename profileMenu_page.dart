@@ -39,19 +39,19 @@ class _SettingsPageUIState extends State<SettingsPageUI> {
         appBar: AppBar(
           // title of app
           title: Text("Profile", style: TextStyle(fontSize: 22)),
+          automaticallyImplyLeading: true,
           actions: <Widget>[
             IconButton(
-              // button to logout
-              icon: const Icon(Icons.logout),
+              icon: Icon(
+                Icons.logout,
+                color: Colors.white,
+              ),
               onPressed: () {
-                // do something
                 Navigator.popUntil(
-                    // pop until login page
                     context,
                     ModalRoute.withName(
-                        'login_page')); // takes you back to the start instead of popping it by one page
-
-                // Navigator.pushNamed(context, 'profileMenu_page');
+                        'login_page')); //if logout is clicked, pop until back to login page
+                // do something
               },
             ),
           ],

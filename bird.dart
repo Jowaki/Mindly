@@ -1,3 +1,5 @@
+
+
 import 'package:flutter/material.dart';
 
 class MyBird extends StatelessWidget { // creating the bird
@@ -8,8 +10,8 @@ class MyBird extends StatelessWidget { // creating the bird
     return Container( // container
       alignment: Alignment(0, birdY), // align the bird
       child: Image.asset( // image for bird
-        'assets/corgi.png',// image
-        width: 50,// size
+        'assets/bear.png',// image
+        width: 90,// size
       ),
     );
   }
